@@ -1,10 +1,10 @@
 /* General Styles */
-* {
+/* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
+/*
 body {
     font-family: 'Poppins', sans-serif;
     background: url('https://media.istockphoto.com/id/541135936/photo/together-we-make-one.jpg?s=2048x2048&w=is&k=20&c=NAwT0v5XodJ_CA2xuuXMgyv8FrWyTI7HHd1Gko_gfLw=')
@@ -18,7 +18,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
 }
-
+*/
 /* Form Container */
 .form-container {
     background: rgba(255, 255, 255, 0.92);
