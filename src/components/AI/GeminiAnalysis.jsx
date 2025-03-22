@@ -1,401 +1,220 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import './GeminiAnalysis.css';
 
-// Note: In production, you should use environment variables instead
-const GEMINI_API_KEY = 'AIzaSyAFeZ8JNZ_WIG4tMzzXZ7lrCYNCJVMcpwk';
-const GeminiAnalysis = () => {
-    const { investorName } = useParams();
-    const navigate = useNavigate();
+const FinancialChatbot = () => {
+    const [messages, setMessages] = useState([
+        {
+            id: 1,
+            type: 'bot',
+            text: "Hello! I am SheWorks Financial AI. I can help you with information about starting a business or a startup. What specific guidance are you looking for today?",
+        },
+    ]);
+    const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
-    const [prompt, setPrompt] = useState('');
-    const [conversations, setConversations] = useState([]);
-    const [isTyping, setIsTyping] = useState(false);
-    const [investorData, setInvestorData] = useState(null);
-    const messagesEndRef = useRef(null);
-    const inputRef = useRef(null);
+    const [conversationContext, setConversationContext] = useState({
+        lastTopic: null,
+        askedFollowUp: false,
+        userDetails: {
+            businessType: null,
+            stage: null,
+            specificConcerns: []
+        },
+        topicsDiscussed: [],
+        hasGreeted: false // Track if the bot has greeted the user
+    });
+    const chatContainerRef = useRef(null);
 
-    // Fetch investor data on mount
-    useEffect(() => {
-        // Simulated investor data fetch - in production replace with real API call
-        fetchInvestorData();
+    // Hardcoded API key (for development purposes only)
+    const apiKey = "AIzaSyAFeZ8JNZ_WIG4tMzzXZ7lrCYNCJVMcpwk"; // Replace with your actual API key
 
-        // Show the welcome message
-        const welcomeMessage = {
-            type: 'system',
-            content: `Welcome to the AI Investment Analysis for ${investorName}! Ask any questions about ${investorName}'s investment strategy, portfolio performance, or market insights. The Gemini AI will analyze and provide detailed answers based on the available data.`,
-            timestamp: new Date(),
-        };
-        setConversations([welcomeMessage]);
-
-        // Focus on input field
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, []);
-
-    // Scroll to the bottom of messages whenever conversations update
-    useEffect(() => {
-        scrollToBottom();
-    }, [conversations]);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    // Simulated data fetch function - replace with real API call in production
-    const fetchInvestorData = () => {
-        setTimeout(() => {
-            setInvestorData({
-                name: investorName,
-                sectors: ['Technology', 'Healthcare', 'Renewable Energy', 'Finance', 'Consumer Goods'],
-                performance: {
-                    annualizedReturn: '18.7%',
-                    sharpeRatio: 1.8,
-                    maxDrawdown: '-12.3%',
-                    volatility: '14.2%',
-                },
-                topHoldings: [
-                    { name: 'AAPL', percentage: 8.5 },
-                    { name: 'MSFT', percentage: 7.2 },
-                    { name: 'AMZN', percentage: 6.3 },
-                    { name: 'NVDA', percentage: 5.8 },
-                    { name: 'GOOGL', percentage: 5.2 },
-                ],
-                riskProfile: 'Moderate-Aggressive',
-                investmentHorizon: 'Long-term (5-10 years)',
-            });
-        }, 1000);
-    };
-
-    const handlePromptChange = (e) => {
-        setPrompt(e.target.value);
-    };
-
-    const handleBack = () => {
-        navigate(-1);
-    };
-
-    // Handle Enter key press
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSubmit(e);
-        }
-    };
-
-    // Display suggested questions
-    const suggestedQuestions = [
-        "What's the investment strategy?",
-        'How has the portfolio performed?',
-        'What are the top holdings?',
-        'How is risk managed?',
-        "What's the market outlook?",
+    // Sample startup topics for quick selection
+    const quickTopics = [
+        "Business plan essentials",
+        "Funding options",
+        "Legal requirements",
+        "Market research",
+        "Financial projections"
     ];
 
-    const handleSuggestedQuestion = (question) => {
-        setPrompt(question);
-        setTimeout(() => {
-            handleSubmit({ preventDefault: () => {} });
-        }, 100);
-    };
+    // Auto-scroll to bottom of chat
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSendMessage = async () => {
+        if (input.trim() === '') return;
 
-        if (!prompt.trim()) return;
-
-        // Add the user message to the conversation
         const userMessage = {
+            id: messages.length + 1,
             type: 'user',
-            content: prompt.trim(),
-            timestamp: new Date(),
+            text: input,
         };
 
-        setConversations((prev) => [...prev, userMessage]);
+        setMessages(prev => [...prev, userMessage]);
+        setInput('');
         setLoading(true);
-        setPrompt('');
 
         try {
-            // Now we'll actually call the Gemini API
-            await callGeminiAPI(userMessage.content);
-        } catch (err) {
-            console.error('Error generating response:', err);
-            const errorMessage = {
-                type: 'error',
-                content: 'Sorry, I encountered an error processing your request. Please try again.',
-                timestamp: new Date(),
-            };
-            setConversations((prev) => [...prev, errorMessage]);
+            // Call to Gemini API with conversation context
+            const response = await fetchGeminiResponse(input, conversationContext);
+
+            // Update the conversation context based on the response
+            if (response.context) {
+                setConversationContext(prevContext => ({
+                    ...prevContext,
+                    ...response.context
+                }));
+            }
+
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    type: 'bot',
+                    text: response.text,
+                },
+            ]);
+        } catch (error) {
+            console.error('Error fetching response:', error);
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    type: 'bot',
+                    text: "I apologize, but I encountered an error. Please try again.",
+                },
+            ]);
         } finally {
             setLoading(false);
         }
     };
 
-    // Function to call the Gemini API
-    const callGeminiAPI = async (userPrompt) => {
-        setIsTyping(true);
-
-        // Create a typing message first
-        const typingMessage = {
-            type: 'ai',
-            content: '',
-            timestamp: new Date(),
-            isTyping: true,
+    const fetchGeminiResponse = async (userInput, context) => {
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    
+        // Updated prompt to enforce strict point-to-point formatting
+        const prompt = `
+            You are SheWorks Financial AI, a financial advisor bot specialized in entrepreneurship and startups. 
+            Your goal is to provide clear, engaging, and point-to-point advice on financial topics. 
+            ${
+                !context.hasGreeted
+                    ? "Start your first response with: 'Hello! I am SheWorks Financial AI. Here's my advice for you:'"
+                    : "Do not greet the user again. Provide the response directly."
+            }
+            
+            Rules:
+            1. Respond only to financial or business-related queries. If the topic is unrelated, politely decline.
+            2. Use bullet points (with "-") for each point.
+            3. Each point must start on a new line.
+            4. Ensure there is a blank line between each point for better readability.
+            5. Do not combine multiple points into a single line.
+            6. Keep the tone professional yet engaging.
+            7. Add interesting facts or tips to make the content eye-catching.
+            8. If the user provides context (e.g., business type or stage), tailor your response accordingly.
+    
+            User's context: ${JSON.stringify(context)}
+            User's input: ${userInput}
+    
+            Provide your response below:
+        `;
+    
+        const result = await model.generateContent(prompt);
+        let responseText = result.response.text();
+    
+        // Post-processing to enforce strict formatting
+        responseText = responseText
+            .replace(/\*\*(.*?)\*\*/g, "\n**$1**\n") // Add new lines around bold text
+            .replace(/\*(.*?)\*/g, "\n*$1*\n") // Add new lines around italic text
+            .replace(/- /g, "\n- ") // Ensure each bullet point starts on a new line
+            .replace(/(\S)\n(\S)/g, "$1\n\n$2") // Add extra spacing between points
+            .replace(/(\n-.*?)(?=\n-)/g, "$1\n"); // Ensure a blank line between points
+    
+        // Update the context to mark that the bot has greeted the user
+        const updatedContext = {
+            ...context,
+            hasGreeted: true, // Mark that the bot has greeted the user
         };
-
-        setConversations((prev) => [...prev, typingMessage]);
-
-        try {
-            // Prepare context with investor data
-            const investorContext = investorData
-                ? `Information about ${investorName}'s portfolio:
-                - Sectors: ${investorData.sectors.join(', ')}
-                - Performance: Annual return ${investorData.performance.annualizedReturn}, Sharpe ratio ${
-                      investorData.performance.sharpeRatio
-                  }
-                - Risk profile: ${investorData.riskProfile}
-                - Investment horizon: ${investorData.investmentHorizon}
-                - Top holdings: ${investorData.topHoldings.map((h) => `${h.name} (${h.percentage}%)`).join(', ')}`
-                : `Limited information available about ${investorName}.`;
-
-            // Prepare the full prompt with investor context
-            const fullPrompt = `You are an AI investment advisor assistant providing information about investor ${investorName}. 
-                
-            ${investorContext}
-                
-            Based on this information, please answer the following question:
-            ${userPrompt}`;
-
-            // Call Gemini API
-            const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        contents: [
-                            {
-                                parts: [
-                                    {
-                                        text: fullPrompt,
-                                    },
-                                ],
-                            },
-                        ],
-                        generationConfig: {
-                            temperature: 0.7,
-                            topK: 40,
-                            topP: 0.95,
-                            maxOutputTokens: 800,
-                        },
-                    }),
-                }
-            );
-
-            const data = await response.json();
-
-            // Handle potential error responses
-            if (!response.ok) {
-                throw new Error(`API error: ${data.error?.message || 'Unknown error'}`);
-            }
-
-            // Extract the text from the response
-            let responseText = '';
-            if (
-                data.candidates &&
-                data.candidates.length > 0 &&
-                data.candidates[0].content &&
-                data.candidates[0].content.parts &&
-                data.candidates[0].content.parts.length > 0
-            ) {
-                responseText = data.candidates[0].content.parts[0].text;
-            } else {
-                responseText = "I couldn't generate a response. Please try again.";
-            }
-
-            // Simulate typing effect for better UX
-            let displayText = '';
-            const fullText = responseText;
-            let i = 0;
-
-            const typingInterval = setInterval(() => {
-                if (i < fullText.length) {
-                    displayText += fullText.charAt(i);
-                    i++;
-
-                    setConversations((prev) => {
-                        const newConversations = [...prev];
-                        const typingIndex = newConversations.findIndex((msg) => msg.isTyping);
-                        if (typingIndex !== -1) {
-                            newConversations[typingIndex].content = displayText;
-                        }
-                        return newConversations;
-                    });
-                } else {
-                    clearInterval(typingInterval);
-                    setIsTyping(false);
-
-                    // Mark the message as completed
-                    setConversations((prev) => {
-                        const newConversations = [...prev];
-                        const typingIndex = newConversations.findIndex((msg) => msg.isTyping);
-                        if (typingIndex !== -1) {
-                            newConversations[typingIndex].isTyping = false;
-                        }
-                        return newConversations;
-                    });
-                }
-            }, 15);
-        } catch (error) {
-            console.error('Error calling Gemini API:', error);
-
-            // Update the typing message to show the error
-            setConversations((prev) => {
-                const newConversations = [...prev];
-                const typingIndex = newConversations.findIndex((msg) => msg.isTyping);
-                if (typingIndex !== -1) {
-                    newConversations[typingIndex] = {
-                        type: 'error',
-                        content: `Error calling Gemini API: ${error.message}`,
-                        timestamp: new Date(),
-                        isTyping: false,
-                    };
-                }
-                return newConversations;
-            });
-
-            setIsTyping(false);
+    
+        // Return the response text and updated context
+        return { text: responseText, context: updatedContext };
+    };
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
         }
     };
 
-    // Function to format timestamps
-    const formatTime = (timestamp) => {
-        return new Intl.DateTimeFormat('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-        }).format(timestamp);
+    const handleQuickTopic = (topic) => {
+        setInput(topic);
+        // Optional: automatically send after selecting
+        // setTimeout(() => handleSendMessage(), 100);
     };
 
     return (
-        <div className="gemini-analysis">
-            <div className="header">
-                <button className="back-button" onClick={handleBack}>
-                    <span className="back-arrow">←</span> Back to Leaderboard
-                </button>
-                <h1 className="investor-name">{investorName}</h1>
-                <div className="gemini-badge">
-                    <span className="gemini-icon">✦</span> Powered by Gemini AI
-                </div>
+        <div className="chatbot-container">
+            <div className="chatbot-header">
+                <h2>Financial Advisor Bot</h2>
+                <p>Your guide to entrepreneurship & startups</p>
             </div>
 
-            {investorData && (
-                <div className="investor-summary">
-                    <div className="summary-card">
-                        <div className="summary-header">Portfolio Overview</div>
-                        <div className="summary-metrics">
-                            <div className="metric">
-                                <div className="metric-label">Annual Return</div>
-                                <div className="metric-value">{investorData.performance.annualizedReturn}</div>
-                            </div>
-                            <div className="metric">
-                                <div className="metric-label">Sharpe Ratio</div>
-                                <div className="metric-value">{investorData.performance.sharpeRatio}</div>
-                            </div>
-                            <div className="metric">
-                                <div className="metric-label">Risk Profile</div>
-                                <div className="metric-value">{investorData.riskProfile}</div>
-                            </div>
-                            <div className="metric">
-                                <div className="metric-label">Top Sectors</div>
-                                <div className="metric-value">{investorData.sectors.slice(0, 2).join(', ')}</div>
-                            </div>
+            <div className="chat-container" ref={chatContainerRef}>
+                {messages.map((message) => (
+                    <div
+                        key={message.id}
+                        className={`message ${message.type === 'user' ? 'user-message' : 'bot-message'}`}
+                    >
+                        <div className="message-avatar">
+                            {message.type === 'user' ? '👤' : '🤖'}
                         </div>
+                        <div className="message-text">{message.text}</div>
                     </div>
-                </div>
-            )}
-
-            <div className="chat-container">
-                <div className="messages-container">
-                    {conversations.map((message, index) => (
-                        <div key={index} className={`message ${message.type}-message ${message.isTyping ? 'typing' : ''}`}>
-                            {message.type === 'system' && <div className="system-message-icon">i</div>}
-                            {message.type === 'user' && (
-                                <div className="user-avatar">
-                                    <span>You</span>
-                                </div>
-                            )}
-                            {message.type === 'ai' && (
-                                <div className="ai-avatar">
-                                    <span>AI</span>
-                                </div>
-                            )}
-                            {message.type === 'error' && <div className="error-message-icon">!</div>}
-
-                            <div className="message-content">
-                                <div className="message-text">
-                                    {message.content}
-                                    {message.isTyping && <span className="typing-cursor"></span>}
-                                </div>
-                                <div className="message-time">{formatTime(message.timestamp)}</div>
-                            </div>
-                        </div>
-                    ))}
-
-                    {loading && !isTyping && (
-                        <div className="message ai-message loading-message">
-                            <div className="ai-avatar">
-                                <span>AI</span>
-                            </div>
-                            <div className="message-content">
-                                <div className="typing-indicator">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                </div>
-
-                {conversations.length <= 2 && !loading && (
-                    <div className="suggested-questions">
-                        <div className="suggested-label">Suggested questions:</div>
-                        <div className="question-chips">
-                            {suggestedQuestions.map((question, index) => (
-                                <button key={index} className="question-chip" onClick={() => handleSuggestedQuestion(question)}>
-                                    {question}
-                                </button>
-                            ))}
+                ))}
+                {loading && (
+                    <div className="message bot-message">
+                        <div className="message-avatar">🤖</div>
+                        <div className="typing-indicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </div>
                 )}
+            </div>
 
-                <form className="prompt-form" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={prompt}
-                        onChange={handlePromptChange}
-                        onKeyPress={handleKeyPress}
-                        placeholder={`Ask about ${investorName}'s investments...`}
-                        className="prompt-input"
-                        disabled={loading || isTyping}
-                        ref={inputRef}
-                    />
-                    <button
-                        type="submit"
-                        className={`send-button ${prompt.trim() && !loading && !isTyping ? 'active' : ''}`}
-                        disabled={!prompt.trim() || loading || isTyping}
-                    >
-                        <span className="send-icon">→</span>
-                    </button>
-                </form>
+            <div className="quick-topics">
+                <p>Popular topics:</p>
+                <div className="topic-buttons">
+                    {quickTopics.map((topic, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleQuickTopic(topic)}
+                            className="topic-button"
+                        >
+                            {topic}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="input-container">
+                <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Ask about starting a business..."
+                    className="chat-input"
+                />
+                <button onClick={handleSendMessage} className="send-button">
+                    Send
+                </button>
             </div>
         </div>
     );
 };
 
-export default GeminiAnalysis;
+export default FinancialChatbot;

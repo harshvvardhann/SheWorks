@@ -1,9 +1,5 @@
 /* General Styles */
-<<<<<<< HEAD
-/* * {
-=======
 /* {
->>>>>>> 01b6eb357c02fa02387fa7daaaf3be24d688ee16
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -21,13 +17,8 @@ body {
     margin: 0;
     padding: 20px;
     overflow-x: hidden;
-<<<<<<< HEAD
-} */
-
-=======
 }
 */
->>>>>>> 01b6eb357c02fa02387fa7daaaf3be24d688ee16
 /* Form Container */
 .form-container {
     background: rgba(255, 255, 255, 0.92);
