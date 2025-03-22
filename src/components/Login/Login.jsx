@@ -1,80 +1,48 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';  // Renamed CSS file for uniqueness
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import './LoginForm.css';
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook for navigation
-  const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    role: 'entrepreneur'
+    password: ''
   });
-
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-    // Reset form data when toggling
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: 'entrepreneur'
-    });
-  };
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setLoading(true);
+    setError('');
     
-    if (!isLogin) {
-      // Redirect based on selected role
-      switch(formData.role) {
-        case 'entrepreneur':
-          navigate('/register/entrepreneur');
-          break;
-        case 'investor':
-          navigate('/register/investor');
-          break;
-        case 'mentor':
-          navigate('/register/mentor');
-          break;
-        default:
-          navigate('/register/entrepreneur');
+    try {
+      // Make POST request to backend for login
+      const response = await axios.post('http://192.168.1.98:5004/api/users/login', formData);
+      
+      if(response.status == 200){
+        navigate('/');
       }
-    } else {
-      // Handle login - you might want to authenticate first, then redirect
-      navigate('/dashboard');
+      // Redirect to dashboard after successful login
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-form-container">
       <div className="login-form-card">
-        <h1 className="login-form-title">{isLogin ? 'Login' : 'Sign Up'}</h1>
+        <h1 className="login-form-title">Login</h1>
+        {error && <div className="login-form-error">{error}</div>}
         <form className="login-form" onSubmit={handleSubmit}>
-          {!isLogin && (
-            <div className="login-form-input-container">
-              <label className="login-form-label">Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                className="login-form-input"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          )}
           <div className="login-form-input-container">
             <label className="login-form-label">Email</label>
             <input
@@ -99,39 +67,22 @@ const Login = () => {
               required
             />
           </div>
-          {!isLogin && (
-            <>
-              <div className="login-form-input-container">
-                <label className="login-form-label">Role</label>
-                <select
-                  name="role"
-                  className="login-form-select"
-                  value={formData.role}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="entrepreneur">Entrepreneur</option>
-                  <option value="investor">Investor</option>
-                  <option value="mentor">Mentor</option>
-                </select>
-              </div>
-            </>
-          )}
-          <button type="submit" className="login-form-button">
-            {isLogin ? 'Login' : 'Sign Up'}
+          <button 
+            type="submit" 
+            className="login-form-button"
+            disabled={loading}
+            onClick={handleSubmit}
+          >
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <div className="login-form-toggle">
           <p className="login-form-toggle-text">
-            {isLogin ? "Don't have an account?" : 'Already have an account?'}
+            Don't have an account?
           </p>
-          <button
-            className="login-form-toggle-button"
-            onClick={toggleForm}
-            type="button"
-          >
-            {isLogin ? 'Sign Up' : 'Login'}
-          </button>
+          <Link to="/signup" className="login-form-toggle-button">
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

@@ -1,0 +1,222 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+  }
+  
+  /* Form Container */
+  .mentor-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .mentor-form-box {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+  }
+  
+  /* Scrollbar styling */
+  .mentor-form-box::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .mentor-form-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .mentor-form-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+  
+  .mentor-form-box::-webkit-scrollbar-thumb:hover {
+    background: #999;
+  }
+  
+  /* Form Title */
+  .mentor-form-title {
+    color: #4963b8;
+    font-size: clamp(18px, 5vw, 20px);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Layout */
+  .mentor-form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  
+  .mentor-form-row .mentor-form-group {
+    flex: 1;
+  }
+  
+  /* Form Fields */
+  .mentor-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .mentor-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .required {
+    color: #e74c3c;
+  }
+  
+  .mentor-form-group input,
+  .mentor-form-group select,
+  .mentor-form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+    background-color: white;
+  }
+  
+  .mentor-form-group input:focus,
+  .mentor-form-group select:focus,
+  .mentor-form-group textarea:focus {
+    outline: none;
+    border-color: #4963b8;
+  }
+  
+  .mentor-form-group input::placeholder,
+  .mentor-form-group textarea::placeholder {
+    color: #aaa;
+    font-size: 12px;
+  }
+  
+  .mentor-form-group textarea {
+    height: 80px;
+    resize: none;
+  }
+  
+  .char-count {
+    text-align: right;
+    font-size: 11px;
+    color: #777;
+    margin-top: 3px;
+  }
+  
+  /* Checkbox styles */
+  .mentor-checkbox-container {
+    margin-bottom: 15px;
+  }
+  
+  .mentor-checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  
+  .mentor-checkbox-label input {
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* Submit Button */
+  .mentor-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4963b8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .mentor-submit-button:hover {
+    background-color: #3a4e94;
+  }
+  
+  /* Form Element */
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .mentor-form-box {
+      max-width: 90%;
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .mentor-form-container {
+      padding: 10px;
+    }
+    
+    .mentor-form-box {
+      max-width: 100%;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    
+    .mentor-form-row {
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .mentor-form-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    
+    .mentor-form-group label {
+      font-size: 12px;
+    }
+    
+    .mentor-form-group input,
+    .mentor-form-group select,
+    .mentor-form-group textarea {
+      padding: 7px 8px;
+      font-size: 12px;
+    }
+    
+    .mentor-submit-button {
+      padding: 8px;
+      font-size: 13px;
+    }
+  }
+  
+  /* Tablet adjustments */
+  @media (min-width: 481px) and (max-width: 1024px) {
+    .mentor-form-box {
+      max-width: 80%;
+    }
+  }
+  
+  /* Large screen adjustments */
+  @media (min-width: 1025px) {
+    .mentor-form-container {
+      height: 100%;
+    }
+  }
