@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';  // Renamed CSS file for uniqueness
 
 const Login = () => {
+  const navigate = useNavigate(); // Hook for navigation
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -32,6 +34,26 @@ const Login = () => {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    if (!isLogin) {
+      // Redirect based on selected role
+      switch(formData.role) {
+        case 'entrepreneur':
+          navigate('/register/entrepreneur');
+          break;
+        case 'investor':
+          navigate('/register/investor');
+          break;
+        case 'mentor':
+          navigate('/register/mentor');
+          break;
+        default:
+          navigate('/register/entrepreneur');
+      }
+    } else {
+      // Handle login - you might want to authenticate first, then redirect
+      navigate('/dashboard');
+    }
   };
 
   return (
