@@ -9,6 +9,7 @@ import FinancialLearningPlatform from './components/FinancialLearningPlatform/Fi
 import AboutUs from './components/About/AboutUs';
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
+import InvestorRegistrationForm from './components/Investorregistrationform/Investorregistrationform';
 
 function App() {
     return (
@@ -24,7 +25,7 @@ function App() {
                     <Route path="/financiallearningplatform" element={<FinancialLearningPlatform />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/login" element={<Login />} />
-                    /
+                    <Route path="/investorregistrationform" element={<InvestorRegistrationForm />} />
                 </Routes>
             </div>
         </Router>
