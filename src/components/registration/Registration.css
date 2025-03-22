@@ -1,0 +1,161 @@
+/* Global container for centering the content */
+.container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 15px; /* Add padding for smaller screens */
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  /* Card style */
+  .card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    box-sizing: border-box;
+  }
+  
+  /* Title Style */
+  .title {
+    font-size: 32px;
+    color: #e91e63;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Option container for layout */
+  .options-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px; /* Add space between the buttons */
+    flex-wrap: wrap; /* Allow wrapping of buttons */
+  }
+  
+  /* Option button styles */
+  .option {
+    padding: 20px 30px;
+    background-color: #e91e63;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex: 1 1 45%; /* Flex-grow, flex-shrink, flex-basis */
+    min-width: 150px; /* Minimum width to prevent the buttons from being too small */
+    text-align: center;
+  }
+  
+  /* Selected option style */
+  .option.selected {
+    background-color: #ff6eb1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+  
+  /* Description Style */
+  .description {
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Button styles */
+  .proceed-button {
+    padding: 16px;
+    background-color: #e91e63;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .proceed-button:hover {
+    background-color: #ff6eb1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Breakpoints */
+  @media screen and (max-width: 1024px) {
+    /* For larger tablets */
+    .card {
+      padding: 30px;
+    }
+  
+    .title {
+      font-size: 28px;
+    }
+  
+    .option {
+      font-size: 16px;
+      padding: 15px 20px;
+      flex: 1 1 48%; /* Adjusted for tablets */
+    }
+  
+    .proceed-button {
+      font-size: 16px;
+      padding: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    /* For tablets and smaller screens */
+    .card {
+      padding: 25px;
+    }
+  
+    .title {
+      font-size: 26px;
+    }
+  
+    .option {
+      font-size: 16px;
+      padding: 12px 18px;
+      flex: 1 1 100%; /* Full width buttons on tablets */
+    }
+  
+    .proceed-button {
+      font-size: 16px;
+      padding: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    /* For mobile screens */
+    .title {
+      font-size: 22px;
+    }
+  
+    .option {
+      font-size: 14px;
+      padding: 12px 18px;
+      flex: 1 1 100%; /* Full width buttons on mobile */
+    }
+  
+    .proceed-button {
+      font-size: 14px;
+      padding: 12px;
+    }
+  }
