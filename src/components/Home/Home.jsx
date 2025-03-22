@@ -4,7 +4,7 @@ import './Home.css';
 
 const SheWorks = () => {
     const carouselRef = useRef(null);
-    const [currentPosition, setCurrentPosition] = useState(0);
+    const [currentPosition] = useState(0);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
 
