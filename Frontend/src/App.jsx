@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Entrepreneurs from '../src/components/Entrepreneurs/Entrepreneurs';
+import Entrepreneurs from './components/Entrepreneurs/Entrepreneurs';
 import WomenEntrepreneurForm from './components/WomenEntrepreneurs/WomenEntrepreneurForm';
 import BusinessList from './components/BusinessList/BusinessList';
 import Home from './components/Home/Home';
