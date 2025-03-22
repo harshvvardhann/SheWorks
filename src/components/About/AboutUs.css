@@ -1,0 +1,600 @@
+/* About Us Styles */
+:root {
+    --primary: #e83e8c;
+    --primary-light: #f8d7e5;
+    --primary-dark: #a41b57;
+    --secondary: #6a1b9a;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --background: #fff9fb;
+    --gray-light: #f5f5f5;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(232, 62, 140, 0.15);
+    --transition: all 0.3s ease;
+}
+
+.about-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+/* Header Section */
+.about-header {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-lg);
+    background-image: url('https://previews.123rf.com/images/gmast3r/gmast3r1609/gmast3r160900544/62361994-business-people-group-men-and-women-standing-separate-discussion-meeting-businesspeople-colleague.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: var(--border-radius);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* This adds opacity to the image */
+    border-radius: var(--border-radius);
+}
+
+.header-overlay {
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    width: 80%;
+    max-width: 800px;
+    position: relative; /* This makes it appear above the overlay */
+    z-index: 1;
+}
+
+.about-header h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-light); /* Changed to light text for better contrast */
+}
+
+.highlight {
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tagline {
+    font-size: 1.2rem;
+    margin-top: 0;
+    color: var(--text-light); /* Changed to light text for better contrast */
+}
+
+/* Mission Section */
+.mission-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    background-color: var(--primary-light);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.mission-content {
+    flex: 1;
+    padding: var(--spacing-md);
+    min-width: 300px;
+}
+
+.mission-content h2 {
+    color: var(--primary-dark);
+    margin-top: 0;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.mission-content h2:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary);
+}
+
+.mission-image {
+    flex: 1;
+    min-width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.mission-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.mission-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Approach Section */
+.approach-section {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.approach-section h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-dark);
+}
+
+.approach-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.approach-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.approach-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.approach-card h3 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+/* Impact Section */
+.impact-section {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
+    background-color: var(--gray-light);
+    border-radius: var(--border-radius);
+}
+
+.impact-section h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-dark);
+}
+
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.stat-box {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    box-shadow: var(--box-shadow);
+}
+
+.stat-box h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--primary);
+}
+
+.stat-box p {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+/* Team Section */
+.team-section {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.team-section h2 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-dark);
+}
+
+.team-intro {
+    max-width: 700px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.team-member {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    margin-bottom: var(--spacing-md);
+}
+
+.member-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto var(--spacing-sm);
+    box-shadow: 0 4px 8px rgba(232, 62, 140, 0.3);
+    border: 3px solid var(--primary-light);
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.member-image img:hover {
+    transform: scale(1.1);
+}
+
+.team-member h3 {
+    margin: var(--spacing-sm) 0 5px;
+    color: var(--primary);
+}
+
+.team-member p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Join Section */
+.join-section {
+    text-align: center;
+    background-color: var(--primary-light);
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+}
+
+.join-section h2 {
+    color: var(--primary-dark);
+    margin-top: 0;
+}
+
+.join-section p {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.cta-primary,
+.cta-secondary {
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.cta-primary {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.cta-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.cta-secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.cta-secondary:hover {
+    background-color: var(--primary-light);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-header {
+        height: 300px;
+    }
+
+    .about-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .header-overlay {
+        width: 90%;
+        padding: var(--spacing-md);
+    }
+
+    .mission-content,
+    .mission-image {
+        flex: 100%;
+    }
+
+    .approach-card,
+    .stat-box {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .team-member {
+        flex-basis: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-header {
+        height: 250px;
+    }
+
+    .about-header h1 {
+        font-size: 2rem;
+    }
+
+    .header-overlay {
+        width: 95%;
+        padding: var(--spacing-sm);
+    }
+
+    .team-member {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
+/* Animations for About Us Page */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Apply animations to specific sections */
+  .about-container {
+    /* No change to position properties */
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .about-header .header-overlay {
+    animation: fadeIn 1.2s ease-out;
+  }
+  
+  .about-header h1 {
+    animation: slideUp 1s ease-out 0.3s both;
+  }
+  
+  .tagline {
+    animation: slideUp 1s ease-out 0.6s both;
+  }
+  
+  /* Mission section animations */
+  .mission-section {
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+  
+  .mission-content {
+    animation: slideInLeft 1s ease-out 0.5s both;
+  }
+  
+  .mission-image {
+    animation: slideInRight 1s ease-out 0.5s both;
+  }
+  
+  /* Approach card animations */
+  .approach-section h2 {
+    animation: slideUp 1s ease-out 0.3s both;
+  }
+  
+  .approach-card:nth-child(1) {
+    animation: scaleIn 0.7s ease-out 0.4s both;
+  }
+  
+  .approach-card:nth-child(2) {
+    animation: scaleIn 0.7s ease-out 0.6s both;
+  }
+  
+  .approach-card:nth-child(3) {
+    animation: scaleIn 0.7s ease-out 0.8s both;
+  }
+  
+  /* Enhanced hover effects */
+  .approach-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(232, 62, 140, 0.25);
+  }
+  
+  .card-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .approach-card:hover .card-icon {
+    transform: scale(1.2);
+  }
+  
+  /* Impact section animations */
+  .impact-section h2 {
+    animation: slideUp 1s ease-out 0.3s both;
+  }
+  
+  .stat-box {
+    animation: fadeIn 0.8s ease-out 0.5s both;
+    transition: all 0.3s ease;
+  }
+  
+  .stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(232, 62, 140, 0.2);
+  }
+  
+  .stat-box h3 {
+    transition: color 0.3s ease;
+  }
+  
+  .stat-box:hover h3 {
+    color: var(--primary-dark);
+  }
+  
+  /* Team section animations */
+  .team-section h2, 
+  .team-intro {
+    animation: slideUp 1s ease-out 0.3s both;
+  }
+  
+  .team-member {
+    animation: fadeIn 1s ease-out 0.5s both;
+    transition: all 0.3s ease;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-7px);
+  }
+  
+  .member-image {
+    transition: all 0.4s ease;
+  }
+  
+  .team-member:hover .member-image {
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(232, 62, 140, 0.4);
+  }
+  
+  /* Animated CTA buttons */
+  .cta-primary, 
+  .cta-secondary {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(164, 27, 87, 0.3);
+  }
+  
+  .cta-secondary:hover {
+    transform: translateY(-3px);
+  }
+  
+  .cta-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  
+  .cta-primary:hover::after {
+    transform: translateX(0);
+  }
+  
+  /* Animation for stats counting effect - to be used with JavaScript */
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .stat-box h3 {
+    animation: countUp 1s ease-out forwards;
+  }
+  
+  /* Scroll trigger class that can be added via JavaScript */
+  .animate-on-scroll {
+    opacity: 0;
+    transition: all 1s ease-out;
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .animate-on-scroll.from-left.visible {
+    transform: translateX(0);
+  }
+  
+  .animate-on-scroll.from-right.visible {
+    transform: translateX(0);
+  }

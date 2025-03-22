@@ -1,0 +1,301 @@
+/* InvestorLeaderboard.css */
+:root {
+    --primary-pink: #ff6b9d;
+    --secondary-pink: #ff9ebb;
+    --light-pink: #ffd1dc;
+    --dark-pink: #e64980;
+    --white: #ffffff;
+    --gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --box-shadow: 0 10px 20px rgba(255, 107, 157, 0.2);
+    --transition: all 0.3s ease;
+}
+
+.investor-leaderboard {
+    position: absolute;
+    top: 1%;
+    left: 12%;
+    width: 70%;
+    margin: 1%;
+    padding: 60px;
+    background: linear-gradient(135deg, var(--white), var(--light-pink));
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.leaderboard-title {
+    text-align: center;
+    color: var(--dark-pink);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    position: relative;
+    animation: fadeInDown 1s ease-out;
+}
+
+.leaderboard-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+.top-investors {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.investor-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 240px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: calc(var(--order) * 0.2s);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.investor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(255, 107, 157, 0.3);
+}
+
+.investor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+}
+
+.investor-rank {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-pink);
+    color: var(--white);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(255, 107, 157, 0.3);
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, gold, #ffcc70);
+    color: var(--dark-gray);
+}
+
+.rank-2 {
+    background: linear-gradient(135deg, silver, #e0e0e0);
+    color: var(--dark-gray);
+}
+
+.rank-3 {
+    background: linear-gradient(135deg, #cd7f32, #e8b27d);
+    color: var(--dark-gray);
+}
+
+.investor-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+}
+
+.investor-amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark-pink);
+    text-align: right;
+    margin-top: auto;
+}
+
+.investor-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+.table-title {
+    font-size: 1.5rem;
+    color: var(--dark-pink);
+    margin-bottom: 15px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.investor-table th {
+    padding: 15px;
+    text-align: left;
+    color: var(--dark-pink);
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-pink);
+}
+
+.investor-table th.amount-column {
+    text-align: right;
+}
+
+.investor-table tr {
+    background-color: var(--white);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    transition: var(--transition);
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: calc(var(--row-index) * 0.1s);
+    opacity: 0;
+}
+
+.investor-table tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.15);
+    background-color: var(--light-pink);
+}
+
+.investor-table td {
+    padding: 15px;
+    border-top: 1px solid #f1f1f1;
+}
+
+.investor-table td:first-child,
+.investor-table th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.investor-table td:last-child,
+.investor-table th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.invester-name {
+    color: var(--dark-pink);
+}
+.rank-column {
+    color: var(--dark-pink);
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.amount-column {
+    color: var(--dark-pink);
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .top-investors {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .investor-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .investor-table th,
+    .investor-table td {
+        padding: 10px;
+    }
+
+    .leaderboard-title {
+        font-size: 2rem;
+    }
+}
+
+/* Add a shimmer effect for the top 3 cards */
+.investor-card.top-3 {
+    position: relative;
+    overflow: hidden;
+}
+
+.investor-card.top-3::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: rotate(30deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: rotate(30deg) translateX(-100%);
+    }
+    100% {
+        transform: rotate(30deg) translateX(100%);
+    }
+}
+
+/* Card content layout */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-header {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.card-name-rank {
+    flex-grow: 1;
+}
