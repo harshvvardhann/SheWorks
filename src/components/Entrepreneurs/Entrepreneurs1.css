@@ -1,0 +1,101 @@
+.business-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.business-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.business-count {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.business-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.business-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 250px;
+    text-align: left;
+}
+
+.business-tag {
+    background: #ff4081;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.business-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.business-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.details-button {
+    background: pink;
+    color: black;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.details-button:hover {
+    background: #ff66a3;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: left;
+}
+
+.modal-content a {
+    display: block;
+    margin-top: 10px;
+}
+
+.close-button {
+    background: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 4px;
+}

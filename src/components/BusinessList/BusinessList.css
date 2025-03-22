@@ -1,0 +1,335 @@
+/* Enhanced BusinessList.css */
+
+/* Base styles with enhanced colors and layout */
+.business-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background decoration */
+.business-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 10% 20%, rgba(255, 39, 122, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 85% 60%, rgba(106, 17, 203, 0.05) 0%, transparent 30%);
+    z-index: 0;
+}
+
+/* Animated heading with gradient */
+.business-heading {
+    position: relative;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    display: inline-block;
+    background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeInDown 1s ease-out, gradientShift 8s ease infinite;
+    z-index: 1;
+}
+
+.business-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
+    animation: expandWidth 1.5s ease-out forwards;
+}
+
+/* Container for business cards */
+.business-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+    perspective: 1000px;
+}
+
+/* Enhanced business card with glass morphism */
+.business-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 39, 122, 0.1), 0 0 0 4px rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    flex: 0 1 340px;
+    box-sizing: border-box;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px;
+    transform-style: preserve-3d;
+    animation: fadeInUp 0.8s backwards;
+    animation-delay: calc(0.1s * var(--i, 1));
+}
+
+/* Animated gradient border effect */
+.business-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #ff277a, #6a11cb, #ff277a);
+    background-size: 200% 100%;
+    animation: gradientBorder 3s linear infinite;
+}
+
+/* Enhanced hover effects */
+.business-card.hovered {
+    transform: translateY(-15px) rotateX(5deg);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 39, 122, 0.2), 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.business-card.hovered::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, transparent 60%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Business card content styling */
+.business-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.business-card.hovered .business-name {
+    transform: scale(1.05);
+}
+
+.business-text {
+    margin: 8px 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.business-text:nth-of-type(1) {
+    font-weight: 600;
+    color: #666;
+}
+
+.business-description {
+    color: #777;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Button container with enhanced styling */
+.button-container {
+    text-align: right;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Enhanced button styling */
+.details-button {
+    background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 39, 122, 0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.details-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #6a11cb 0%, #ff277a 100%);
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+.details-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(255, 39, 122, 0.5);
+}
+
+.details-button:hover::before {
+    left: 0;
+}
+
+.details-button:active {
+    transform: translateY(-1px);
+}
+
+/* Add card count indicator */
+.business-count {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
+    color: white;
+    font-size: 0.9rem;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Added tag styling for business categories */
+.business-tag {
+    display: inline-block;
+    background: rgba(255, 39, 122, 0.1);
+    color: #ff277a;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.business-card.hovered .business-tag {
+    background: rgba(255, 39, 122, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .business-heading {
+        font-size: 28px;
+    }
+
+    .business-list {
+        gap: 20px;
+    }
+
+    .business-card {
+        flex: 0 1 calc(100% - 20px);
+        min-height: 220px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradientBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Added subtle floating animation for cards */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Add subtle wave effect to container */
+@keyframes wave {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
