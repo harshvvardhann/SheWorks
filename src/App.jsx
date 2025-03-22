@@ -3,6 +3,10 @@ import Entrepreneurs from '../src/components/Entrepreneurs/Entrepreneurs';
 import WomenEntrepreneurForm from './components/WomenEntrepreneurs/WomenEntrepreneurForm';
 import BusinessList from './components/BusinessList/BusinessList';
 import Home from './components/Home/Home';
+import LeaderBoard from './components/LeaderBoards/InvestorLeaderboard';
+import GeminiAnalysis from './components/AI/GeminiAnalysis';
+import FinancialLearningPlatform from './components/FinancialLearningPlatform/FinancialLearningPlatform';
+import AboutUs from './components/About/AboutUs';
 
 function App() {
     return (
@@ -13,6 +17,10 @@ function App() {
                     <Route path="/entrepreneur-form" element={<WomenEntrepreneurForm />} />
                     <Route path="/entrepreneurs" element={<Entrepreneurs />} />
                     <Route path="/business-list" element={<BusinessList />} />
+                    <Route path="/leaderboard" element={<LeaderBoard />} />
+                    <Route path="/ai" element={<GeminiAnalysis />} />
+                    <Route path="/financiallearningplatform" element={<FinancialLearningPlatform />} />
+                    <Route path="/about" element={<AboutUs />} />
                 </Routes>
             </div>
         </Router>

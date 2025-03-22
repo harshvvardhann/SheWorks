@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #ff5a87;
+    --primary-color: #9a344f;
     --secondary-color: #8e44ad;
     --accent-color: #00bcd4;
     --dark-color: #2c3e50;
@@ -17,6 +17,8 @@
 }
 .mainClass {
     width: 140%;
+    background: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')
+        no-repeat center/cover;
 }
 
 .container {
@@ -168,7 +170,7 @@ nav {
 /* Hero Section Styles */
 .hero {
     padding: 100px 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)),
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
         url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat
             center/cover;
 }
@@ -184,7 +186,7 @@ nav {
     font-size: 3rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    background: linear-gradient(45deg, var(--dark-color), var(--secondary-color));
+    background: linear-gradient(45deg, var(--dark-color), var(--primary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -194,7 +196,7 @@ nav {
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: var(--text-light);
+    color: var(--dark-color);
     animation: fadeIn 1.2s ease-in;
 }
 
@@ -796,7 +798,7 @@ footer {
     .nav-links {
         display: none;
     }
-    
+
     .program-cards {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -838,7 +840,7 @@ footer {
     .cta h2 {
         font-size: 2rem;
     }
-    
+
     .story-card {
         flex: 0 0 85%;
     }
@@ -848,12 +850,12 @@ footer {
     .hero-content h1 {
         font-size: 1.8rem;
     }
-    
+
     .cta-btn {
         padding: 12px 25px;
         font-size: 0.9rem;
     }
-    
+
     .stat-item h3 {
         font-size: 2.5rem;
     }

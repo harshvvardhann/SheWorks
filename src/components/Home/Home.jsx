@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css'; // Import the external CSS file
 
 const SheWorks = () => {
@@ -92,16 +93,16 @@ const SheWorks = () => {
                             </div>
                             <ul className="nav-links">
                                 <li>
-                                    <a href="#">AI</a>
+                                    <Link to="/ai">AI</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Finance</a>
+                                    <Link to="/financiallearningplatform">Finance Learning</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Community</a>
+                                    <Link to="/leaderboard">Community</Link>
                                 </li>
                                 <li>
-                                    <a href="#">About</a>
+                                    <Link to="/about">About</Link>
                                 </li>
                             </ul>
                             <div className="auth-buttons">
