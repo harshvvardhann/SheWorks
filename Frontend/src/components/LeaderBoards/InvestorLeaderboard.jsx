@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './InvestorLeaderboard.css';
 
-const investorsData = [
-    { rank: 1, name: 'Sophia Roberts', amount: '₹5,00,00,000' },
-    { rank: 2, name: 'Isabella Smith', amount: '₹3,50,00,000' },
-    { rank: 3, name: 'Olivia Johnson', amount: '₹2,50,00,000' },
-    { rank: 4, name: 'Emma Williams', amount: '₹1,50,00,000' },
-    { rank: 5, name: 'Ava Brown', amount: '₹1,20,00,000' },
-    { rank: 6, name: 'Mia Davis', amount: '₹1,00,00,000' },
-    { rank: 7, name: 'Charlotte Wilson', amount: '₹95,00,000' },
-    { rank: 8, name: 'Amelia Moore', amount: '₹90,00,000' },
-    { rank: 9, name: 'Ella Martinez', amount: '₹85,00,000' },
-    { rank: 10, name: 'Liam Patel', amount: '₹80,00,000' },
-];
+const API_URL = 'http://localhost:5004/api/investors';
 
 const TopInvestorCard = ({ investor, index }) => {
     return (
         <div className={`investor-card top-3`} style={{ '--order': index }}>
-            <div className={`investor-rank rank-${investor.rank}`}>{investor.rank}</div>
-            <div className="investor-name">{investor.name}</div>
-            <div className="investor-amount">{investor.amount}</div>
+            <div className={`investor-rank rank-${index + 1}`}>{index + 1}</div>
+            <div className="investor-name">
+                {investor.first_name} {investor.middle_name} {investor.last_name}
+            </div>
+            <div className="investor-amount">₹{investor.amount_wanted_to_invest.toLocaleString()}</div>
         </div>
     );
 };
@@ -38,10 +29,12 @@ const InvestorTable = ({ title, investors }) => {
                 </thead>
                 <tbody>
                     {investors.map((investor, index) => (
-                        <tr key={investor.rank} style={{ '--row-index': index }}>
-                            <td className="rank-column">{investor.rank}</td>
-                            <td className="invester-name">{investor.name}</td>
-                            <td className="amount-column">{investor.amount}</td>
+                        <tr key={index}>
+                            <td className="rank-column">{index + 4}</td>
+                            <td className="investor-name">
+                                {investor.first_name} {investor.middle_name} {investor.last_name}
+                            </td>
+                            <td className="amount-column">₹{investor.amount_wanted_to_invest.toLocaleString()}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -55,24 +48,36 @@ const InvestorLeaderboard = () => {
     const [remainingInvestors, setRemainingInvestors] = useState([]);
 
     useEffect(() => {
-        setTopInvestors(investorsData.slice(0, 3));
-        setRemainingInvestors(investorsData.slice(3));
+        const fetchInvestors = async () => {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                // Sort investors by highest amount invested
+                const sortedInvestors = data.sort((a, b) => b.amount_wanted_to_invest - a.amount_wanted_to_invest);
+
+                setTopInvestors(sortedInvestors.slice(0, 3));
+                setRemainingInvestors(sortedInvestors.slice(3));
+            } catch (error) {
+                console.error('Error fetching investors:', error);
+            }
+        };
+
+        fetchInvestors();
     }, []);
 
     return (
-        <>
-            <div className="investor-leaderboard">
-                <h1 className="leaderboard-title">Top Investors Leaderboard</h1>
+        <div className="investor-leaderboard">
+            <h1 className="leaderboard-title">Top Investors Leaderboard</h1>
 
-                <div className="top-investors">
-                    {topInvestors.map((investor, index) => (
-                        <TopInvestorCard key={investor.rank} investor={investor} index={index} />
-                    ))}
-                </div>
-
-                <InvestorTable title="Other Top Performers" investors={remainingInvestors} />
+            <div className="top-investors">
+                {topInvestors.map((investor, index) => (
+                    <TopInvestorCard key={index} investor={investor} index={index} />
+                ))}
             </div>
-        </>
+
+            <InvestorTable title="Other Top Performers" investors={remainingInvestors} />
+        </div>
     );
 };
 

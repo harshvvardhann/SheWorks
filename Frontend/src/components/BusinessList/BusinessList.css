@@ -210,7 +210,7 @@
 
 /* Add card count indicator */
 .business-count {
-    margin-right: 500px;
+    margin-right: 230px;
     display: block;
     background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
     color: white;

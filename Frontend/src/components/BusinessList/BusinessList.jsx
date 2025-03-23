@@ -1,9 +1,68 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './BusinessList.css';
 
-// BusinessCard component updated to match MongoDB fields
+// Modal Component for Contact Information
+const BusinessModal = ({ business, isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>{business.business_name}</h2>
+                    <button className="close-button" onClick={onClose}>
+                        ×
+                    </button>
+                </div>
+                <div className="modal-body">
+                    <div className="detail-section">
+                        <h3>Entrepreneur Details</h3>
+                        <div className="detail-item">
+                            <span className="detail-label">Founder</span>
+                            <span className="detail-value">{business.founder_name}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Business Category</span>
+                            <span className="detail-value">{business.business_category}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">About the Business</span>
+                            <div className="detail-description">{business.business_description}</div>
+                        </div>
+                    </div>
+
+                    <div className="detail-section">
+                        <h3>Contact Information</h3>
+                        <div className="detail-item">
+                            <span className="detail-label">Email</span>
+                            <span className="detail-value">contact@{business.business_name.toLowerCase().replace(/\s/g, '')}.com</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Phone</span>
+                            <span className="detail-value">+1 (555) 123-4567</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Office Location</span>
+                            <span className="detail-value">New York, NY</span>
+                        </div>
+                    </div>
+
+                    <div className="modal-actions">
+                        <button className="invest-button">Schedule Meeting</button>
+                        <button className="contact-button" onClick={onClose}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// BusinessCard component updated with modal integration
 const BusinessCard = ({ business_name, founder_name, business_description, business_category, index }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const cardRef = useRef(null);
 
     // Track mouse position for shine effect
@@ -24,27 +83,40 @@ const BusinessCard = ({ business_name, founder_name, business_description, busin
         animation: isHovered ? 'none' : `float 3s ease-in-out infinite ${index * 0.2}s`,
     };
 
+    // Business object to pass to modal
+    const businessData = {
+        business_name,
+        founder_name,
+        business_description,
+        business_category,
+    };
+
     return (
-        <div
-            ref={cardRef}
-            className={`business-card ${isHovered ? 'hovered' : ''}`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onMouseMove={handleMouseMove}
-            style={style}
-        >
-            <div>
-                <span className="business-tag">{business_category}</span>
-                <h2 className="business-name">{business_name}</h2>
-                <p className="business-text">Founded by: {founder_name}</p>
-                <p className="business-description">{business_description}</p>
+        <>
+            <div
+                ref={cardRef}
+                className={`business-card ${isHovered ? 'hovered' : ''}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onMouseMove={handleMouseMove}
+                style={style}
+            >
+                <div>
+                    <span className="business-tag">{business_category}</span>
+                    <h2 className="business-name">{business_name}</h2>
+                    <p className="business-text">Founded by: {founder_name}</p>
+                    <p className="business-description">{business_description}</p>
+                </div>
+                <div className="button-container">
+                    <button className="details-button" onClick={() => setShowModal(true)}>
+                        Explore Investment
+                    </button>
+                </div>
             </div>
-            <div className="button-container">
-                <button className="details-button" onClick={() => alert(`Exploring investment opportunities with ${business_name}!`)}>
-                    Explore Investment
-                </button>
-            </div>
-        </div>
+
+            {/* Modal Component */}
+            <BusinessModal business={businessData} isOpen={showModal} onClose={() => setShowModal(false)} />
+        </>
     );
 };
 
@@ -122,9 +194,6 @@ const BusinessList = () => {
                         index={index}
                     />
                 ))}
-            </div>
-            <div className="modal-actions">
-                <button className="contact-button">Contact Entrepreneur</button>
             </div>
         </div>
     );

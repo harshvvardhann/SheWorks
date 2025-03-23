@@ -26,6 +26,7 @@ app.use('/api/entrepreneurs', entrepreneurRoutes);
 app.use('/api/investors', investorRoutes);
 app.use('/api/mentors', mentorRoutes);
 app.use('/api/users', authRoutes);
+app.use('/api/mail', authRoutes);
 
 // Initialize server
 async function start() {
