@@ -398,163 +398,197 @@
 
 /* Animations for About Us Page */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
-  @keyframes slideInLeft {
-    from { transform: translateX(-50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes slideInRight {
-    from { transform: translateX(50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes scaleIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Apply animations to specific sections */
-  .about-container {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Apply animations to specific sections */
+.about-container {
     /* No change to position properties */
     animation: fadeIn 1s ease-out;
-  }
-  
-  .about-header .header-overlay {
+}
+
+.about-header .header-overlay {
     animation: fadeIn 1.2s ease-out;
-  }
-  
-  .about-header h1 {
+}
+
+.about-header h1 {
     animation: slideUp 1s ease-out 0.3s both;
-  }
-  
-  .tagline {
+}
+
+.tagline {
     animation: slideUp 1s ease-out 0.6s both;
-  }
-  
-  /* Mission section animations */
-  .mission-section {
+}
+
+/* Mission section animations */
+.mission-section {
     animation: fadeIn 1s ease-out 0.3s both;
-  }
-  
-  .mission-content {
+}
+
+.mission-content {
     animation: slideInLeft 1s ease-out 0.5s both;
-  }
-  
-  .mission-image {
+}
+
+.mission-image {
     animation: slideInRight 1s ease-out 0.5s both;
-  }
-  
-  /* Approach card animations */
-  .approach-section h2 {
+}
+
+/* Approach card animations */
+.approach-section h2 {
     animation: slideUp 1s ease-out 0.3s both;
-  }
-  
-  .approach-card:nth-child(1) {
+}
+
+.approach-card:nth-child(1) {
     animation: scaleIn 0.7s ease-out 0.4s both;
-  }
-  
-  .approach-card:nth-child(2) {
+}
+
+.approach-card:nth-child(2) {
     animation: scaleIn 0.7s ease-out 0.6s both;
-  }
-  
-  .approach-card:nth-child(3) {
+}
+
+.approach-card:nth-child(3) {
     animation: scaleIn 0.7s ease-out 0.8s both;
-  }
-  
-  /* Enhanced hover effects */
-  .approach-card:hover {
+}
+
+/* Enhanced hover effects */
+.approach-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(232, 62, 140, 0.25);
-  }
-  
-  .card-icon {
+}
+
+.card-icon {
     transition: transform 0.3s ease;
-  }
-  
-  .approach-card:hover .card-icon {
+}
+
+.approach-card:hover .card-icon {
     transform: scale(1.2);
-  }
-  
-  /* Impact section animations */
-  .impact-section h2 {
+}
+
+/* Impact section animations */
+.impact-section h2 {
     animation: slideUp 1s ease-out 0.3s both;
-  }
-  
-  .stat-box {
+}
+
+.stat-box {
     animation: fadeIn 0.8s ease-out 0.5s both;
     transition: all 0.3s ease;
-  }
-  
-  .stat-box:hover {
+}
+
+.stat-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(232, 62, 140, 0.2);
-  }
-  
-  .stat-box h3 {
+}
+
+.stat-box h3 {
     transition: color 0.3s ease;
-  }
-  
-  .stat-box:hover h3 {
+}
+
+.stat-box:hover h3 {
     color: var(--primary-dark);
-  }
-  
-  /* Team section animations */
-  .team-section h2, 
-  .team-intro {
+}
+
+/* Team section animations */
+.team-section h2,
+.team-intro {
     animation: slideUp 1s ease-out 0.3s both;
-  }
-  
-  .team-member {
+}
+
+.team-member {
     animation: fadeIn 1s ease-out 0.5s both;
     transition: all 0.3s ease;
-  }
-  
-  .team-member:hover {
+}
+
+.team-member:hover {
     transform: translateY(-7px);
-  }
-  
-  .member-image {
+}
+
+.member-image {
     transition: all 0.4s ease;
-  }
-  
-  .team-member:hover .member-image {
+}
+
+.team-member:hover .member-image {
     border-color: var(--primary);
     box-shadow: 0 8px 20px rgba(232, 62, 140, 0.4);
-  }
-  
-  /* Animated CTA buttons */
-  .cta-primary, 
-  .cta-secondary {
+}
+
+/* Animated CTA buttons */
+.cta-primary,
+.cta-secondary {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-  }
-  
-  .cta-primary:hover {
+}
+
+.cta-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(164, 27, 87, 0.3);
-  }
-  
-  .cta-secondary:hover {
+}
+
+.cta-secondary:hover {
     transform: translateY(-3px);
-  }
-  
-  .cta-primary::after {
+}
+
+.cta-primary::after {
     content: '';
     position: absolute;
     top: 0;
@@ -564,37 +598,43 @@
     background: rgba(255, 255, 255, 0.2);
     transform: translateX(-100%);
     transition: transform 0.4s ease;
-  }
-  
-  .cta-primary:hover::after {
+}
+
+.cta-primary:hover::after {
     transform: translateX(0);
-  }
-  
-  /* Animation for stats counting effect - to be used with JavaScript */
-  @keyframes countUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .stat-box h3 {
+}
+
+/* Animation for stats counting effect - to be used with JavaScript */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-box h3 {
     animation: countUp 1s ease-out forwards;
-  }
-  
-  /* Scroll trigger class that can be added via JavaScript */
-  .animate-on-scroll {
+}
+
+/* Scroll trigger class that can be added via JavaScript */
+.animate-on-scroll {
     opacity: 0;
     transition: all 1s ease-out;
-  }
-  
-  .animate-on-scroll.visible {
+}
+
+.animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
-  }
-  
-  .animate-on-scroll.from-left.visible {
+}
+
+.animate-on-scroll.from-left.visible {
     transform: translateX(0);
-  }
-  
-  .animate-on-scroll.from-right.visible {
+}
+
+.animate-on-scroll.from-right.visible {
     transform: translateX(0);
-  }
+}

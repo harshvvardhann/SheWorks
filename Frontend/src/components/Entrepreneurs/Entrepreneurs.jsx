@@ -1,89 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Entrepreneurs1.css';
-
-const businesses = [
-    {
-        name: 'Tech Solutions',
-        entrepreneur: 'Jane Doe',
-        teamSize: 5,
-        description: 'A cutting-edge AI company focused on automation and efficiency.',
-        category: 'Technology',
-        stage: 'Scaling',
-    },
-    {
-        name: 'Green Energy',
-        entrepreneur: 'Sarah Smith',
-        teamSize: 8,
-        description: 'Sustainable energy solutions for a cleaner future.',
-        category: 'Environment',
-        stage: 'Growth',
-    },
-    {
-        name: 'Fashion Forward',
-        entrepreneur: 'Emily Johnson',
-        teamSize: 4,
-        description: 'A trendy fashion brand emphasizing eco-friendly materials.',
-        category: 'Fashion',
-        stage: 'Startup',
-    },
-    {
-        name: 'Handmade Crafts',
-        entrepreneur: 'Olivia Brown',
-        teamSize: 3,
-        description: 'Beautiful handcrafted items made with love and precision.',
-        category: 'Arts',
-        stage: 'Early Stage',
-    },
-    {
-        name: 'Wellness Hub',
-        entrepreneur: 'Sophia Wilson',
-        teamSize: 6,
-        description: 'A holistic approach to mental and physical well-being.',
-        category: 'Health',
-        stage: 'Scaling',
-    },
-    {
-        name: 'Organic Beauty',
-        entrepreneur: 'Ava Martinez',
-        teamSize: 5,
-        description: 'Natural beauty products crafted from organic ingredients.',
-        category: 'Beauty',
-        stage: 'Growth',
-    },
-    {
-        name: 'Healthy Bites',
-        entrepreneur: 'Mia Anderson',
-        teamSize: 4,
-        description: 'Nutritious and delicious meal solutions for a healthier lifestyle.',
-        category: 'Food',
-        stage: 'Startup',
-    },
-    {
-        name: 'Home Decor',
-        entrepreneur: 'Isabella Thomas',
-        teamSize: 7,
-        description: 'Elegant and modern home decor solutions handcrafted with precision.',
-        category: 'Decor',
-        stage: 'Early Stage',
-    },
-    {
-        name: 'EduCare',
-        entrepreneur: 'Amelia White',
-        teamSize: 6,
-        description: 'Innovative educational tools and methods for better learning.',
-        category: 'Education',
-        stage: 'Growth',
-    },
-];
+import axios from 'axios';
 
 const Entrepreneur = ({ business, onShowDetails }) => {
     return (
         <div className="business-card">
             <div>
-                <span className="business-tag">{business.category}</span>
-                <h2 className="business-name">{business.name}</h2>
-                <p className="business-text">Founded by: {business.entrepreneur}</p>
-                <p className="business-text">Team Size: {business.teamSize}</p>
+                <span className="business-tag">{business.field_of_business}</span>
+                <h2 className="business-name">{business.business_name}</h2>
+                <p className="business-text">Stage: {business.current_stage}</p>
+                <p className="business-text">Team Size: {business.team_size}</p>
             </div>
             <div>
                 <button className="details-button" onClick={() => onShowDetails(business)}>
@@ -94,46 +20,168 @@ const Entrepreneur = ({ business, onShowDetails }) => {
     );
 };
 
+const BusinessDetailsModal = ({ business, onClose }) => {
+    if (!business) return null;
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h2>{business.business_name}</h2>
+                    <button className="close-button" onClick={onClose}>
+                        ×
+                    </button>
+                </div>
+                <div className="modal-body">
+                    <div className="detail-section">
+                        <div className="detail-item">
+                            <span className="detail-label">Field of Business:</span>
+                            <span className="detail-value">{business.field_of_business}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Founder:</span>
+                            <span className="detail-value">{business.first_name}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Current Stage:</span>
+                            <span className="detail-value">{business.current_stage}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Team Size:</span>
+                            <span className="detail-value">{business.team_size}</span>
+                        </div>
+                        {business.business_description && (
+                            <div className="detail-item">
+                                <span className="detail-label">Description:</span>
+                                <p className="detail-description">{business.business_description}</p>
+                            </div>
+                        )}
+                        {business.location && (
+                            <div className="detail-item">
+                                <span className="detail-label">Location:</span>
+                                <span className="detail-value">{business.location}</span>
+                            </div>
+                        )}
+                        {business.funding_needed && (
+                            <div className="detail-item">
+                                <span className="detail-label">Funding Needed:</span>
+                                <span className="detail-value">${business.funding_needed.toLocaleString()}</span>
+                            </div>
+                        )}
+                        {business.founding_year && (
+                            <div className="detail-item">
+                                <span className="detail-label">Founded:</span>
+                                <span className="detail-value">{business.founding_year}</span>
+                            </div>
+                        )}
+                        {business.website && (
+                            <div className="detail-item">
+                                <span className="detail-label">Website:</span>
+                                <a href={business.website} target="_blank" rel="noopener noreferrer" className="detail-link">
+                                    {business.website}
+                                </a>
+                            </div>
+                        )}
+                        {business.contact_email && (
+                            <div className="detail-item">
+                                <span className="detail-label">Contact Email:</span>
+                                <a href={`mailto:${business.contact_email}`} className="detail-link">
+                                    {business.contact_email}
+                                </a>
+                            </div>
+                        )}
+                    </div>
+
+                    {business.achievements && business.achievements.length > 0 && (
+                        <div className="detail-section">
+                            <h3>Achievements</h3>
+                            <ul className="achievements-list">
+                                {business.achievements.map((achievement, index) => (
+                                    <li key={index}>{achievement}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    <div className="modal-actions">
+                        <button className="contact-button">Contact Entrepreneur</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Entrepreneurs = () => {
+    const [businesses, setBusinesses] = useState([]);
     const [selectedBusiness, setSelectedBusiness] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchBusinesses = async () => {
+            try {
+                setLoading(true);
+                // Replace with your actual API endpoint
+                const response = await axios.get('http://localhost:5004/api/entrepreneurs');
+
+                setBusinesses(response.data);
+                setLoading(false);
+            } catch (err) {
+                console.error('Error fetching businesses:', err);
+                setError('Failed to load businesses. Please try again later.');
+                setLoading(false);
+            }
+        };
+
+        fetchBusinesses();
+    }, []);
+
+    const closeModal = () => {
+        setSelectedBusiness(null);
+    };
+
+    // Close modal when clicking escape key
+    useEffect(() => {
+        const handleEscKey = (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        };
+
+        if (selectedBusiness) {
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleEscKey);
+        };
+    }, [selectedBusiness]);
 
     return (
         <div className="business-container">
             <h1 className="business-heading">Women-Led Investment Opportunities</h1>
-            <div className="business-count">{businesses.length} Businesses Available</div>
-            <div className="business-list">
-                {businesses.map((business, index) => (
-                    <Entrepreneur key={index} business={business} onShowDetails={setSelectedBusiness} />
-                ))}
-            </div>
-            {selectedBusiness && (
-                <div className="modal-overlay" onClick={() => setSelectedBusiness(null)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <h2>{selectedBusiness.name}</h2>
-                        <p>
-                            <strong>Entrepreneur:</strong> {selectedBusiness.entrepreneur}
-                        </p>
-                        <p>
-                            <strong>Team Size:</strong> {selectedBusiness.teamSize}
-                        </p>
-                        <p>
-                            <strong>Category:</strong> {selectedBusiness.category}
-                        </p>
-                        <p>
-                            <strong>Current Stage:</strong> {selectedBusiness.stage}
-                        </p>
-                        <p>{selectedBusiness.description}</p>
-                        <a href="https://drive.google.com/your-report-link" target="_blank" rel="noopener noreferrer">
-                            View Full Report
-                        </a>
-                        <br />
-                        <br />
-                        <button className="close-button" onClick={() => setSelectedBusiness(null)}>
-                            Close
-                        </button>
+
+            {loading ? (
+                <div className="loading-indicator">Loading businesses...</div>
+            ) : error ? (
+                <div className="error-message">{error}</div>
+            ) : (
+                <>
+                    <div className="business-count">{businesses.length} Businesses Available</div>
+                    <div className="business-list">
+                        {businesses.length > 0 ? (
+                            businesses.map((business, index) => (
+                                <Entrepreneur key={business._id || index} business={business} onShowDetails={setSelectedBusiness} />
+                            ))
+                        ) : (
+                            <div className="no-businesses">No businesses available at the moment.</div>
+                        )}
                     </div>
-                </div>
+                </>
             )}
+
+            {selectedBusiness && <BusinessDetailsModal business={selectedBusiness} onClose={closeModal} />}
         </div>
     );
 };

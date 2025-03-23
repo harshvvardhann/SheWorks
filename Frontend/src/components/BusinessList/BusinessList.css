@@ -11,6 +11,10 @@
     overflow: hidden;
 }
 
+.business-container-1 {
+    justify-items: center;
+}
+
 /* Background decoration */
 .business-container::before {
     content: '';
@@ -39,7 +43,7 @@
     z-index: 1;
 }
 
-.business-heading::after {
+/* .business-heading::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -49,7 +53,7 @@
     height: 3px;
     background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
     animation: expandWidth 1.5s ease-out forwards;
-}
+} */
 
 /* Container for business cards */
 .business-list {
@@ -99,7 +103,8 @@
 
 /* Enhanced hover effects */
 .business-card.hovered {
-    transform: translateY(-15px) rotateX(5deg);
+    /* transform: translateY(-15px) rotateX(5deg); */
+    transform: translateY(-10px);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 39, 122, 0.2), 0 0 0 4px rgba(255, 255, 255, 0.4);
 }
 
@@ -129,7 +134,7 @@
 }
 
 .business-card.hovered .business-name {
-    transform: scale(1.05);
+    transform: scale(1);
 }
 
 .business-text {
@@ -171,7 +176,7 @@
     cursor: pointer;
     border-radius: 30px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
     box-shadow: 0 4px 15px rgba(255, 39, 122, 0.4);
     position: relative;
     overflow: hidden;
@@ -205,14 +210,16 @@
 
 /* Add card count indicator */
 .business-count {
-    display: inline-block;
+    margin-right: 500px;
+    display: block;
     background: linear-gradient(90deg, #ff277a 0%, #6a11cb 100%);
     color: white;
     font-size: 0.9rem;
-    padding: 5px 15px;
+    padding: 5px 20px;
     border-radius: 20px;
     margin-bottom: 30px;
     animation: fadeIn 1s ease-out;
+    width: 30%;
 }
 
 /* Added tag styling for business categories */

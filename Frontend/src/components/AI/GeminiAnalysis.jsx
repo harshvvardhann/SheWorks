@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import './GeminiAnalysis.css';
 
 const FinancialChatbot = () => {
@@ -7,7 +7,7 @@ const FinancialChatbot = () => {
         {
             id: 1,
             type: 'bot',
-            text: "Hello! I am SheWorks Financial AI. I can help you with information about starting a business or a startup. What specific guidance are you looking for today?",
+            text: 'Hello! I am SheWorks Financial AI. I can help you with information about starting a business or a startup. What specific guidance are you looking for today?',
         },
     ]);
     const [input, setInput] = useState('');
@@ -18,24 +18,18 @@ const FinancialChatbot = () => {
         userDetails: {
             businessType: null,
             stage: null,
-            specificConcerns: []
+            specificConcerns: [],
         },
         topicsDiscussed: [],
-        hasGreeted: false // Track if the bot has greeted the user
+        hasGreeted: false, // Track if the bot has greeted the user
     });
     const chatContainerRef = useRef(null);
 
     // Hardcoded API key (for development purposes only)
-    const apiKey = "AIzaSyAFeZ8JNZ_WIG4tMzzXZ7lrCYNCJVMcpwk"; // Replace with your actual API key
+    const apiKey = 'AIzaSyAFeZ8JNZ_WIG4tMzzXZ7lrCYNCJVMcpwk'; // Replace with your actual API key
 
     // Sample startup topics for quick selection
-    const quickTopics = [
-        "Business plan essentials",
-        "Funding options",
-        "Legal requirements",
-        "Market research",
-        "Financial projections"
-    ];
+    const quickTopics = ['Business plan essentials', 'Funding options', 'Legal requirements', 'Market research', 'Financial projections'];
 
     // Auto-scroll to bottom of chat
     useEffect(() => {
@@ -53,7 +47,7 @@ const FinancialChatbot = () => {
             text: input,
         };
 
-        setMessages(prev => [...prev, userMessage]);
+        setMessages((prev) => [...prev, userMessage]);
         setInput('');
         setLoading(true);
 
@@ -63,13 +57,13 @@ const FinancialChatbot = () => {
 
             // Update the conversation context based on the response
             if (response.context) {
-                setConversationContext(prevContext => ({
+                setConversationContext((prevContext) => ({
                     ...prevContext,
-                    ...response.context
+                    ...response.context,
                 }));
             }
 
-            setMessages(prev => [
+            setMessages((prev) => [
                 ...prev,
                 {
                     id: prev.length + 1,
@@ -79,12 +73,12 @@ const FinancialChatbot = () => {
             ]);
         } catch (error) {
             console.error('Error fetching response:', error);
-            setMessages(prev => [
+            setMessages((prev) => [
                 ...prev,
                 {
                     id: prev.length + 1,
                     type: 'bot',
-                    text: "I apologize, but I encountered an error. Please try again.",
+                    text: 'I apologize, but I encountered an error. Please try again.',
                 },
             ]);
         } finally {
@@ -94,8 +88,8 @@ const FinancialChatbot = () => {
 
     const fetchGeminiResponse = async (userInput, context) => {
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
         // Updated prompt to enforce strict point-to-point formatting
         const prompt = `
             You are SheWorks Financial AI, a financial advisor bot specialized in entrepreneurship and startups. 
@@ -103,7 +97,7 @@ const FinancialChatbot = () => {
             ${
                 !context.hasGreeted
                     ? "Start your first response with: 'Hello! I am SheWorks Financial AI. Here's my advice for you:'"
-                    : "Do not greet the user again. Provide the response directly."
+                    : 'Do not greet the user again. Provide the response directly.'
             }
             
             Rules:
@@ -121,24 +115,24 @@ const FinancialChatbot = () => {
     
             Provide your response below:
         `;
-    
+
         const result = await model.generateContent(prompt);
         let responseText = result.response.text();
-    
+
         // Post-processing to enforce strict formatting
         responseText = responseText
-            .replace(/\*\*(.*?)\*\*/g, "\n**$1**\n") // Add new lines around bold text
-            .replace(/\*(.*?)\*/g, "\n*$1*\n") // Add new lines around italic text
-            .replace(/- /g, "\n- ") // Ensure each bullet point starts on a new line
-            .replace(/(\S)\n(\S)/g, "$1\n\n$2") // Add extra spacing between points
-            .replace(/(\n-.*?)(?=\n-)/g, "$1\n"); // Ensure a blank line between points
-    
+            .replace(/\*\*(.*?)\*\*/g, '\n**$1**\n') // Add new lines around bold text
+            .replace(/\*(.*?)\*/g, '\n*$1*\n') // Add new lines around italic text
+            .replace(/- /g, '\n- ') // Ensure each bullet point starts on a new line
+            .replace(/(\S)\n(\S)/g, '$1\n\n$2') // Add extra spacing between points
+            .replace(/(\n-.*?)(?=\n-)/g, '$1\n'); // Ensure a blank line between points
+
         // Update the context to mark that the bot has greeted the user
         const updatedContext = {
             ...context,
             hasGreeted: true, // Mark that the bot has greeted the user
         };
-    
+
         // Return the response text and updated context
         return { text: responseText, context: updatedContext };
     };
@@ -163,13 +157,8 @@ const FinancialChatbot = () => {
 
             <div className="chat-container" ref={chatContainerRef}>
                 {messages.map((message) => (
-                    <div
-                        key={message.id}
-                        className={`message ${message.type === 'user' ? 'user-message' : 'bot-message'}`}
-                    >
-                        <div className="message-avatar">
-                            {message.type === 'user' ? '👤' : '🤖'}
-                        </div>
+                    <div key={message.id} className={`message ${message.type === 'user' ? 'user-message' : 'bot-message'}`}>
+                        <div className="message-avatar">{message.type === 'user' ? '👤' : '🤖'}</div>
                         <div className="message-text">{message.text}</div>
                     </div>
                 ))}
@@ -189,11 +178,7 @@ const FinancialChatbot = () => {
                 <p>Popular topics:</p>
                 <div className="topic-buttons">
                     {quickTopics.map((topic, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handleQuickTopic(topic)}
-                            className="topic-button"
-                        >
+                        <button key={index} onClick={() => handleQuickTopic(topic)} className="topic-button">
                             {topic}
                         </button>
                     ))}

@@ -1,5 +1,5 @@
-/* SignupForm.css - Specific styles for the Signup component */
-.signup-form-container {
+/* LoginForm.css - Styles for both Login and Signup components */
+.login-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,9 +9,9 @@
     box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
-  }
-  
-  .signup-form-card {
+}
+
+.login-form-card {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -20,38 +20,39 @@
     padding: 30px;
     margin: 0 auto;
     box-sizing: border-box;
-  }
-  
-  .signup-form-title {
+}
+
+.login-form-title {
     text-align: center;
     color: #333;
     margin-bottom: 30px;
     font-size: 26px;
     font-weight: 600;
-  }
-  
-  .signup-form {
+}
+
+.login-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
-  }
-  
-  .signup-form-input-container {
+}
+
+.login-form-input-container {
     display: flex;
     flex-direction: column;
     gap: 6px;
     width: 100%;
-  }
-  
-  .signup-form-label {
+}
+
+.login-form-label {
     font-size: 14px;
     font-weight: 500;
     color: #555;
     margin-left: 2px;
-  }
-  
-  .signup-form-input, .signup-form-select {
+}
+
+.login-form-input,
+.login-form-select {
     padding: 12px 16px;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -60,24 +61,25 @@
     background-color: #f9fafc;
     width: 100%;
     box-sizing: border-box;
-  }
-  
-  .signup-form-input:focus, .signup-form-select:focus {
+}
+
+.login-form-input:focus,
+.login-form-select:focus {
     outline: none;
     border-color: #2d7af6;
     box-shadow: 0 0 0 3px rgba(45, 122, 246, 0.15);
-  }
-  
-  .signup-form-select {
+}
+
+.login-form-select {
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 40px;
-  }
-  
-  .signup-form-button {
+}
+
+.login-form-button {
     background-color: #2d7af6;
     color: white;
     border: none;
@@ -89,32 +91,32 @@
     transition: background-color 0.2s ease;
     margin-top: 10px;
     width: 100%;
-  }
-  
-  .signup-form-button:hover {
+}
+
+.login-form-button:hover {
     background-color: #1c68e3;
-  }
-  
-  .signup-form-button:disabled {
+}
+
+.login-form-button:disabled {
     background-color: #a0c0f3;
     cursor: not-allowed;
-  }
-  
-  .signup-form-toggle {
+}
+
+.login-form-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 24px;
     gap: 8px;
-  }
-  
-  .signup-form-toggle-text {
+}
+
+.login-form-toggle-text {
     font-size: 14px;
     color: #555;
     margin: 0;
-  }
-  
-  .signup-form-toggle-button {
+}
+
+.login-form-toggle-button {
     background: none;
     border: none;
     color: #2d7af6;
@@ -123,13 +125,13 @@
     font-size: 14px;
     padding: 0;
     text-decoration: none;
-  }
-  
-  .signup-form-toggle-button:hover {
+}
+
+.login-form-toggle-button:hover {
     text-decoration: underline;
-  }
-  
-  .signup-form-error {
+}
+
+.login-form-error {
     background-color: #fff0f0;
     color: #e53e3e;
     padding: 10px 15px;
@@ -137,88 +139,38 @@
     border-left: 4px solid #e53e3e;
     margin-bottom: 20px;
     font-size: 14px;
-  }
-  
-  /* Role selector specific styling */
-  .signup-form-role-container {
-    margin-top: 5px;
-  }
-  
-  .signup-form-role-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 8px;
-  }
-  
-  .signup-form-role-options {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  
-  .signup-form-role-option {
-    flex: 1;
-    min-width: 100px;
-  }
-  
-  .signup-form-role-radio {
-    display: none;
-  }
-  
-  .signup-form-role-label {
-    display: block;
-    padding: 10px;
-    text-align: center;
-    background-color: #f0f4f8;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 14px;
-  }
-  
-  .signup-form-role-radio:checked + .signup-form-role-label {
-    background-color: #e0ebff;
-    border-color: #2d7af6;
-    color: #2d7af6;
-    font-weight: 500;
-  }
-  
-  /* Enhanced responsive styles */
-  @media (max-width: 480px) {
-    .signup-form-card {
-      padding: 20px;
-      max-width: 100%;
+}
+
+/* Enhanced responsive styles */
+@media (max-width: 480px) {
+    .login-form-card {
+        padding: 20px;
+        max-width: 100%;
     }
-    
-    .signup-form-title {
-      font-size: 22px;
-      margin-bottom: 20px;
+
+    .login-form-title {
+        font-size: 22px;
+        margin-bottom: 20px;
     }
-    
-    .signup-form-button {
-      padding: 12px;
+
+    .login-form-button {
+        padding: 12px;
     }
-    
-    .signup-form-input, .signup-form-select {
-      padding: 10px 14px;
+
+    .login-form-input,
+    .login-form-select {
+        padding: 10px 14px;
     }
-    
-    .signup-form-role-options {
-      flex-direction: column;
-      gap: 8px;
+}
+
+/* Extra small devices */
+@media (max-width: 320px) {
+    .login-form-card {
+        padding: 15px;
     }
-  }
-  
-  /* Extra small devices */
-  @media (max-width: 320px) {
-    .signup-form-card {
-      padding: 15px;
+
+    .login-form-toggle {
+        flex-direction: column;
+        gap: 5px;
     }
-    
-    .signup-form-toggle {
-      flex-direction: column;
-      gap: 5px;
-    }
-  }
+}

@@ -1,75 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './BusinessList.css';
 
-// Enhanced business data with categories
-const businesses = [
-    {
-        name: 'Tech Solutions',
-        entrepreneur: 'Jane Doe',
-        teamSize: 5,
-        description: 'A cutting-edge AI company focused on automation and efficiency.',
-        category: 'Technology',
-    },
-    {
-        name: 'Green Energy',
-        entrepreneur: 'Sarah Smith',
-        teamSize: 8,
-        description: 'Sustainable energy solutions for a cleaner future.',
-        category: 'Environment',
-    },
-    {
-        name: 'Fashion Forward',
-        entrepreneur: 'Emily Johnson',
-        teamSize: 4,
-        description: 'A trendy fashion brand emphasizing eco-friendly materials.',
-        category: 'Fashion',
-    },
-    {
-        name: 'Handmade Crafts',
-        entrepreneur: 'Olivia Brown',
-        teamSize: 3,
-        description: 'Beautiful handcrafted items made with love and precision.',
-        category: 'Arts',
-    },
-    {
-        name: 'Wellness Hub',
-        entrepreneur: 'Sophia Wilson',
-        teamSize: 6,
-        description: 'A holistic approach to mental and physical well-being.',
-        category: 'Health',
-    },
-    {
-        name: 'Organic Beauty',
-        entrepreneur: 'Ava Martinez',
-        teamSize: 5,
-        description: 'Natural beauty products crafted from organic ingredients.',
-        category: 'Beauty',
-    },
-    {
-        name: 'Healthy Bites',
-        entrepreneur: 'Mia Anderson',
-        teamSize: 4,
-        description: 'Nutritious and delicious meal solutions for a healthier lifestyle.',
-        category: 'Food',
-    },
-    {
-        name: 'Home Decor',
-        entrepreneur: 'Isabella Thomas',
-        teamSize: 7,
-        description: 'Elegant and modern home decor solutions handcrafted with precision.',
-        category: 'Decor',
-    },
-    {
-        name: 'EduCare',
-        entrepreneur: 'Amelia White',
-        teamSize: 6,
-        description: 'Innovative educational tools and methods for better learning.',
-        category: 'Education',
-    },
-];
-
-// Enhanced BusinessCard component with mouse tracking for shine effect
-const BusinessCard = ({ name, entrepreneur, teamSize, description, category, index }) => {
+// BusinessCard component updated to match MongoDB fields
+const BusinessCard = ({ business_name, founder_name, business_description, business_category, index }) => {
     const [isHovered, setIsHovered] = useState(false);
     const cardRef = useRef(null);
 
@@ -101,14 +34,13 @@ const BusinessCard = ({ name, entrepreneur, teamSize, description, category, ind
             style={style}
         >
             <div>
-                <span className="business-tag">{category}</span>
-                <h2 className="business-name">{name}</h2>
-                <p className="business-text">Founded by: {entrepreneur}</p>
-                <p className="business-text">Team Size: {teamSize}</p>
-                <p className="business-description">{description}</p>
+                <span className="business-tag">{business_category}</span>
+                <h2 className="business-name">{business_name}</h2>
+                <p className="business-text">Founded by: {founder_name}</p>
+                <p className="business-description">{business_description}</p>
             </div>
             <div className="button-container">
-                <button className="details-button" onClick={() => alert(`Exploring investment opportunities with ${name}!`)}>
+                <button className="details-button" onClick={() => alert(`Exploring investment opportunities with ${business_name}!`)}>
                     Explore Investment
                 </button>
             </div>
@@ -116,25 +48,83 @@ const BusinessCard = ({ name, entrepreneur, teamSize, description, category, ind
     );
 };
 
-// Main BusinessList component with added animations and counters
+// Updated BusinessList component with API data fetching
 const BusinessList = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [businesses, setBusinesses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        // Fetch data from your backend API
+        const fetchBusinesses = async () => {
+            try {
+                // Using your existing API endpoint
+                const response = await fetch('http://localhost:5004/api/investors');
+
+                // Check if the response is ok
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setBusinesses(data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching businesses:', error);
+                setError('Failed to load businesses. Please try again later.');
+                setLoading(false);
+            }
+        };
+
+        fetchBusinesses();
+
         // Trigger the animation after component mounts
         setTimeout(() => {
             setIsVisible(true);
         }, 300);
     }, []);
 
+    // Loading state
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+                <p>Loading businesses...</p>
+            </div>
+        );
+    }
+
+    // Error state
+    if (error) {
+        return (
+            <div className="error-container">
+                <p className="error-message">{error}</p>
+                <button onClick={() => window.location.reload()}>Try Again</button>
+            </div>
+        );
+    }
+
     return (
         <div className={`business-container ${isVisible ? 'animated' : ''}`}>
-            <h1 className="business-heading">Women-Led Investment Opportunities</h1>
-            <div className="business-count">{businesses.length} Businesses Available</div>
+            <div className="business-container-1">
+                <h1 className="business-heading">Women-Led Investment Opportunities</h1>
+                <div className="business-count">{businesses.length} Businesses Available</div>
+            </div>
             <div className="business-list">
                 {businesses.map((business, index) => (
-                    <BusinessCard key={index} {...business} index={index} />
+                    <BusinessCard
+                        key={business._id || index}
+                        business_name={business.business_name}
+                        founder_name={business.first_name}
+                        business_description={business.business_description}
+                        business_category={business.business_category}
+                        index={index}
+                    />
                 ))}
+            </div>
+            <div className="modal-actions">
+                <button className="contact-button">Contact Entrepreneur</button>
             </div>
         </div>
     );

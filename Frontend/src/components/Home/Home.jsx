@@ -74,22 +74,22 @@ const SheWorks = () => {
     //         const elapsed = timestamp - lastTimestamp;
     //         if (elapsed > 16) { // limit to roughly 60fps
     //             const pixelsToMove = scrollSpeed * elapsed;
-                
+
     //             setCurrentPosition((prev) => {
     //                 const newPosition = prev - pixelsToMove;
     //                 const totalWidth = carouselRef.current?.scrollWidth || 0;
     //                 const containerWidth = carouselRef.current?.clientWidth || 0;
-                    
+
     //                 // Reset position when all items have scrolled past
     //                 if (Math.abs(newPosition) >= (totalWidth - containerWidth)) {
     //                     return 0;
     //                 }
     //                 return newPosition;
     //             });
-                
+
     //             lastTimestamp = timestamp;
     //         }
-            
+
     //         animationFrameId = requestAnimationFrame(autoScroll);
     //     };
 
@@ -100,7 +100,7 @@ const SheWorks = () => {
     // Improved scroll event handling with debounce
     useEffect(() => {
         let timeoutId;
-        
+
         const handleScroll = () => {
             // Show/hide scroll to top button
             if (window.scrollY > 300) {
@@ -119,8 +119,8 @@ const SheWorks = () => {
                 // Add animations to elements when they enter viewport
                 const animateElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
                 const windowHeight = window.innerHeight;
-                
-                animateElements.forEach(element => {
+
+                animateElements.forEach((element) => {
                     const elementTop = element.getBoundingClientRect().top;
                     if (elementTop < windowHeight - 100) {
                         element.classList.add('visible');
@@ -150,7 +150,7 @@ const SheWorks = () => {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: 'smooth',
         });
     };
 
@@ -169,17 +169,35 @@ const SheWorks = () => {
                             <h1>SheWorks</h1>
                         </div>
                         <ul className="nav-links">
-                            <li><Link to="/ai">AI</Link></li>
-                            <li><Link to="/financiallearningplatform">Finance Learning</Link></li>
-                            <li><Link to="/leaderboard">Community</Link></li>
-                            <li><Link to="/about">About</Link></li>
+                            <li>
+                                <Link to="/ai">AI</Link>
+                            </li>
+                            <li>
+                                <Link to="/financiallearningplatform">Finance Learning</Link>
+                            </li>
+                            <li>
+                                <Link to="/leaderboard">LeaderBoard</Link>
+                            </li>
+                            <li>
+                                <Link to="/businesslist">BusinessList</Link>
+                            </li>
+                            <li>
+                                <Link to="/entrepreneurlist">EntrepreneurList</Link>
+                            </li>
+                            <li>
+                                <Link to="/about">About</Link>
+                            </li>
                         </ul>
                         <div className="auth-buttons">
-                            <a href="#" className="login-btn">Login</a>
-                            <a href="#" className="signup-btn">Sign Up</a>
+                            <Link to="/login" className="login-btn">
+                                Login
+                            </Link>
+                            <Link to="/signup" className="signup-btn">
+                                Signup
+                            </Link>
                         </div>
                         <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
-                            <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+                            <i className={mobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
                         </button>
                     </nav>
                 </div>
@@ -191,7 +209,9 @@ const SheWorks = () => {
                     <div className="hero-content">
                         <h1>Empowering Women to Thrive in Their Careers</h1>
                         <p>Join thousands of women building successful careers and businesses</p>
-                        <a href="#" className="cta-btn">Start Your Journey</a>
+                        <a href="#" className="cta-btn">
+                            Start Your Journey
+                        </a>
                         <p className="join-text">Join 50,000+ successful women</p>
                     </div>
                     <div className="hero-image">
@@ -242,7 +262,8 @@ const SheWorks = () => {
                                     <p className="testimonial">{story.quote}</p>
                                     <h4>{story.name}</h4>
                                     <p className="position">
-                                        {story.position}<br />
+                                        {story.position}
+                                        <br />
                                         {story.company}
                                     </p>
                                 </div>
@@ -279,7 +300,9 @@ const SheWorks = () => {
                 <div className="container1">
                     <h2>Ready to Transform Your Career?</h2>
                     <p>Join our community of ambitious women</p>
-                    <a href="#" className="cta-btn" >Get Started</a>
+                    <a href="#" className="cta-btn">
+                        Get Started
+                    </a>
                 </div>
             </section>
 
@@ -291,27 +314,49 @@ const SheWorks = () => {
                             <h3>SheWorks</h3>
                             <p>Empowering women to achieve their professional goals</p>
                             <div className="social-links">
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
-                                <a href="#"><i className="fab fa-twitter"></i></a>
-                                <a href="#"><i className="fab fa-instagram"></i></a>
+                                <a href="#">
+                                    <i className="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#">
+                                    <i className="fab fa-twitter"></i>
+                                </a>
+                                <a href="#">
+                                    <i className="fab fa-instagram"></i>
+                                </a>
                             </div>
                         </div>
                         <div className="footer-column">
                             <h4>Quick Links</h4>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Programs</a></li>
-                                <li><a href="#">Success Stories</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Programs</a>
+                                </li>
+                                <li>
+                                    <a href="#">Success Stories</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
                             </ul>
                         </div>
                         <div className="footer-column">
                             <h4>Resources</h4>
                             <ul>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Events</a></li>
-                                <li><a href="#">Support</a></li>
+                                <li>
+                                    <a href="#">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#">Careers</a>
+                                </li>
+                                <li>
+                                    <a href="#">Events</a>
+                                </li>
+                                <li>
+                                    <a href="#">Support</a>
+                                </li>
                             </ul>
                         </div>
                         <div className="footer-column">
