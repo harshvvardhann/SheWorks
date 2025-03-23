@@ -52,12 +52,16 @@ const registerUser = async (req, res) => {
             { expiresIn: '24h' } // Token expiry time (1 hour in this case)
         );
         console.log(token);
-
         // Set token in cookie
         res.cookie('token', token, {
-            httpOnly: true, // To protect against XSS attacks
-            secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Strict',
+            maxAge: 3600000,
         });
+
+        // Set token in cookie
+        res.setHeader('Authorization', `Bearer ${token}`);
 
         // Or set token in header (alternative to setting in cookie)
         // res.setHeader('Authorization', `Bearer ${token}`);

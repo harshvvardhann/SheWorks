@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './InvestorRegistrationForm.css'; // Import the CSS file
 
 const InvestorRegistrationForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -43,6 +45,7 @@ const InvestorRegistrationForm = () => {
             mentorship: false,
             receiveMails: false,
         });
+        navigate('/');
     };
 
     return (

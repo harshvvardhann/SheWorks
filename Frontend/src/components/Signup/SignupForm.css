@@ -1,4 +1,3 @@
-/* SignupForm.css - Specific styles for the Signup component */
 .signup-form-container {
     display: flex;
     justify-content: center;
@@ -141,7 +140,6 @@
     font-size: 14px;
 }
 
-/* Role selector specific styling */
 .signup-form-role-container {
     margin-top: 5px;
 }
@@ -187,7 +185,6 @@
     font-weight: 500;
 }
 
-/* Enhanced responsive styles */
 @media (max-width: 480px) {
     .signup-form-card {
         padding: 20px;
@@ -214,7 +211,6 @@
     }
 }
 
-/* Extra small devices */
 @media (max-width: 320px) {
     .signup-form-card {
         padding: 15px;

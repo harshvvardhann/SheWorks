@@ -166,7 +166,7 @@ const SheWorks = () => {
                     <nav className={mobileMenuOpen ? 'mobile-menu-open' : ''}>
                         <div className="logo">
                             <i className="fas fa-graduation-cap"></i>
-                            <h1>SheWorks</h1>
+                            <h1 className="title">SheWorks</h1>
                         </div>
                         <ul className="nav-links">
                             <li>

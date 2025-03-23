@@ -34,13 +34,13 @@ const Signup = () => {
                 // If registration is successful, navigate to the appropriate page based on the role
                 switch (formData.role) {
                     case 'entrepreneur':
-                        navigate('/investorregistrationform');
+                        navigate('/entrepreneur-form');
                         break;
                     case 'investor':
                         navigate('/investorregistrationform');
                         break;
                     case 'mentor':
-                        navigate('/investorregistrationform');
+                        navigate('/mentorregistration');
                         break;
                     default:
                         navigate('/investorregistrationform');

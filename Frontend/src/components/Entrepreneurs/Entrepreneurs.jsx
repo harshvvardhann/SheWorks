@@ -22,6 +22,20 @@ const Entrepreneur = ({ business, onShowDetails }) => {
 
 const BusinessDetailsModal = ({ business, onClose }) => {
     if (!business) return null;
+    const handleContact = () => {
+        try {
+            const response = axios.post('http://localhost:5004/api/mail/send-mail', {
+                toEmail: 'neelsutariya21@gmail.com',
+                subject: 'Contact for Business Opportunity',
+                message: 'Hey the mail send successfully...',
+            });
+            console.log(response);
+
+            alert('Mail Send Successfully....');
+        } catch (err) {
+            console.log('An Error Occured', err);
+        }
+    };
 
     return (
         <div className="modal-overlay">
@@ -104,7 +118,9 @@ const BusinessDetailsModal = ({ business, onClose }) => {
                     )}
 
                     <div className="modal-actions">
-                        <button className="contact-button">Contact Entrepreneur</button>
+                        <button className="contact-button" onClick={handleContact}>
+                            Contact Entrepreneur
+                        </button>
                     </div>
                 </div>
             </div>

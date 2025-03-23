@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './WomenEntrepreneurForm.css';
 
 const WomenEntrepreneurForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         business: '',
@@ -41,6 +43,7 @@ const WomenEntrepreneurForm = () => {
             // Reset form or redirect after submission
             // setFormData({...}) - uncomment if you want to reset
         }, 1000);
+        navigate('/');
     };
 
     const currentStageOptions = ['Idea Stage', 'Prototype', 'Pre-Revenue', 'Revenue Generating', 'Scaling', 'Established'];

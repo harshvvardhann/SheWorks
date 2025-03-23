@@ -5,13 +5,19 @@ const { getDb, collections } = require('../config/db');
 // Middleware to verify JWT token - remains mostly the same
 const authenticateToken = async (req, res, next) => {
     // Get token from header
+    // Check for token in Authorization header
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN format
+    let token = authHeader && authHeader.split(' ')[1]; // Format: "Bearer TOKEN"
 
+    // If no token in header, check in cookies
+    // if (!token) {
+    //     token = req.cookies.token; // JWT token stored in cookies
+    // }
+
+    // If still no token, deny access
     if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
-
     try {
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);

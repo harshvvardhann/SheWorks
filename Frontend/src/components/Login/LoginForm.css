@@ -1,4 +1,3 @@
-/* LoginForm.css - Styles for both Login and Signup components */
 .login-form-container {
     display: flex;
     justify-content: center;
@@ -141,7 +140,6 @@
     font-size: 14px;
 }
 
-/* Enhanced responsive styles */
 @media (max-width: 480px) {
     .login-form-card {
         padding: 20px;
@@ -163,7 +161,6 @@
     }
 }
 
-/* Extra small devices */
 @media (max-width: 320px) {
     .login-form-card {
         padding: 15px;

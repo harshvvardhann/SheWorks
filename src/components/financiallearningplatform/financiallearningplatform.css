@@ -1,5 +1,3 @@
-/* Financial Learning Platform CSS - Cohesive Pink Theme */
-/* Base styles and variables */
 :root {
     --primary-color: #ff5a87;
     --primary-light: #ff7fa4;
@@ -14,7 +12,6 @@
     --shadow: 0 4px 10px rgba(255, 90, 135, 0.2);
     --transition: all 0.3s ease;
 
-    /* Stage colors - pink/magenta tones */
     --pre-seed-color: #ff3385;
     --seed-color: #ff0066;
     --series-a-color: #e6005c;
@@ -24,7 +21,6 @@
     --legal-color: #800033;
 }
 
-/* Font sizes for accessibility */
 .font-size-small {
     font-size: 0.85rem;
 }
@@ -72,7 +68,6 @@ body {
     --shadow: 0 4px 10px rgba(255, 90, 135, 0.3);
 }
 
-/* Header styles */
 .financial-learning-platform .platform-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -96,7 +91,6 @@ body {
     margin-right: auto;
 }
 
-/* Accessibility controls */
 .financial-learning-platform .accessibility-controls {
     display: flex;
     justify-content: center;
@@ -203,7 +197,6 @@ body {
     color: white;
 }
 
-/* Journey navigation - UPDATED FOR FULL WIDTH */
 .financial-learning-platform .journey-navigation {
     margin-bottom: 2.5rem;
     width: 100%;
@@ -258,7 +251,6 @@ body {
     border-color: var(--primary-dark);
 }
 
-/* Funding stages - UPDATED FOR FULL WIDTH */
 .financial-learning-platform .funding-journey {
     display: flex;
     flex-direction: column;
@@ -333,7 +325,6 @@ body {
     font-size: 1.4rem;
 }
 
-/* Terms grid - UPDATED FOR BETTER RESPONSIVENESS */
 .financial-learning-platform .terms-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -388,7 +379,6 @@ body {
     transform: translateX(5px);
 }
 
-/* Search results - UPDATED FOR FULL WIDTH */
 .financial-learning-platform .search-results {
     margin-bottom: 2.5rem;
     width: 100%;
@@ -464,7 +454,6 @@ body {
     border: 2px solid var(--primary-light);
 }
 
-/* Modal */
 .financial-learning-platform .modal-overlay {
     position: fixed;
     top: 0;
@@ -648,7 +637,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* Resources section - UPDATED FOR FULL WIDTH */
 .financial-learning-platform .resources-section {
     margin: 4rem 0;
     width: 100%;
@@ -740,7 +728,6 @@ body {
     box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
 }
 
-/* Footer - UPDATED FOR FULL WIDTH */
 .financial-learning-platform .platform-footer {
     margin-top: auto;
     background-color: var(--card-background);
@@ -876,7 +863,6 @@ body {
     filter: brightness(110%);
 }
 
-/* Responsive adjustments - IMPROVED */
 @media (max-width: 1200px) {
     .financial-learning-platform {
         padding: 1.5rem;
@@ -917,9 +903,7 @@ body {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
-/* Enhanced Animations for Financial Learning Platform */
 
-/* Base Animation Keyframes */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -971,7 +955,6 @@ body {
     }
 }
 
-/* Page Load Animations */
 .financial-learning-platform {
     animation: fadeIn 0.8s ease-in-out;
 }
@@ -1000,7 +983,6 @@ body {
     animation-delay: 0.8s;
 }
 
-/* Enhanced Interactive Elements */
 .financial-learning-platform .journey-navigation a {
     position: relative;
     overflow: hidden;
@@ -1033,7 +1015,6 @@ body {
     animation: pulse 2s infinite ease-in-out;
 }
 
-/* Funding Stage Enhanced Animations */
 .financial-learning-platform .funding-stage {
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
@@ -1067,7 +1048,6 @@ body {
     transform: translateX(100%);
 }
 
-/* Term Cards Enhanced Animations */
 .financial-learning-platform .term-card {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
@@ -1090,7 +1070,6 @@ body {
     color: var(--primary-dark);
 }
 
-/* Modal Animations */
 .financial-learning-platform .modal-overlay {
     animation: fadeIn 0.4s ease-out;
     backdrop-filter: blur(5px);
@@ -1111,7 +1090,6 @@ body {
     background-color: var(--primary-color);
 }
 
-/* Resource Cards Enhanced Animations */
 .financial-learning-platform .resource-card {
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
@@ -1161,7 +1139,6 @@ body {
     box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
 }
 
-/* Accessibility Button Animations */
 .financial-learning-platform .accessibility-button {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1171,7 +1148,6 @@ body {
     box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
 }
 
-/* Search Bar Enhancement */
 .financial-learning-platform .search-container input {
     transition: all 0.4s ease;
 }
@@ -1181,7 +1157,6 @@ body {
     box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.25);
 }
 
-/* Footer Enhancements */
 .financial-learning-platform .platform-footer {
     position: relative;
     overflow: hidden;
@@ -1208,7 +1183,6 @@ body {
     box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
 }
 
-/* Scroll Animation Helper */
 .financial-learning-platform .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);

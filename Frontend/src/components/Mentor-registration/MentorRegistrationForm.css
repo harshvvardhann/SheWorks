@@ -1,4 +1,3 @@
-/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,6 @@
     color: black;
 }
 
-/* Form Container */
 .mentor-form-container {
     display: flex;
     justify-content: center;
@@ -26,7 +24,6 @@
     height: auto;
 }
 
-/* Scrollbar styling */
 .mentor-form-box::-webkit-scrollbar {
     width: 6px;
 }
@@ -45,7 +42,6 @@
     background: #999;
 }
 
-/* Form Title */
 .mentor-form-title {
     color: #4963b8;
     font-size: clamp(18px, 5vw, 20px);
@@ -53,7 +49,6 @@
     margin-bottom: 20px;
 }
 
-/* Form Layout */
 .mentor-form-row {
     display: flex;
     gap: 12px;
@@ -64,7 +59,6 @@
     flex: 1;
 }
 
-/* Form Fields */
 .mentor-form-group {
     margin-bottom: 15px;
 }
@@ -118,7 +112,6 @@
     margin-top: 3px;
 }
 
-/* Checkbox styles */
 .mentor-checkbox-container {
     margin-bottom: 15px;
 }
@@ -136,7 +129,6 @@
     height: 14px;
 }
 
-/* Submit Button */
 .mentor-submit-button {
     width: 100%;
     padding: 10px;
@@ -154,14 +146,12 @@
     background-color: #3a4e94;
 }
 
-/* Form Element */
 form {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .mentor-form-box {
         max-width: 90%;
@@ -207,14 +197,12 @@ form {
     }
 }
 
-/* Tablet adjustments */
 @media (min-width: 481px) and (max-width: 1024px) {
     .mentor-form-box {
         max-width: 80%;
     }
 }
 
-/* Large screen adjustments */
 @media (min-width: 1025px) {
     .mentor-form-container {
         height: 100%;

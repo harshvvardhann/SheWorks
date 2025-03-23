@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './FinancialLearningPlatform.css';
+import { useNavigate } from 'react-router-dom';
 
 const FinancialLearningPlatform = () => {
-    const [activeStage, setActiveStage] = useState(null);
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [selectedTerm, setSelectedTerm] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
@@ -17,7 +18,7 @@ const FinancialLearningPlatform = () => {
             title: 'Pre-Seed',
             description: 'The earliest stage of funding, often used to develop an initial product or concept.',
             color: '#8A2BE2',
-            videoId: 'example123',
+            videoId: 'bvjyaz4ZiVI',
             terms: [
                 {
                     name: 'Bootstrapping',
@@ -32,7 +33,7 @@ const FinancialLearningPlatform = () => {
                 {
                     name: 'Convertible Note',
                     description: 'A debt instrument that converts to equity at a future financing round, often with a discount.',
-                    examples: "Y Combinator's SAFE(Simple Agreement for Future Equity) is a popular alternative to convertible notes.",
+                    examples: "Y Combinator's SAFE (Simple Agreement for Future Equity) is a popular alternative to convertible notes.",
                 },
                 {
                     name: 'Angel Investor',
@@ -53,7 +54,7 @@ const FinancialLearningPlatform = () => {
             title: 'Seed',
             description: 'Capital to help a company grow and establish product-market fit.',
             color: '#4B0082',
-            videoId: 'example456',
+            videoId: 'm_557UrDLRY',
             terms: [
                 {
                     name: 'Valuation Cap',
@@ -95,7 +96,7 @@ const FinancialLearningPlatform = () => {
             title: 'Series A',
             description: 'First significant round of venture capital financing, usually after achieving key metrics.',
             color: '#0000CD',
-            videoId: 'example789',
+            videoId: 'Fk9BCr5pLTU',
             terms: [
                 {
                     name: 'Term Sheet',
@@ -140,7 +141,7 @@ const FinancialLearningPlatform = () => {
             title: 'Series B',
             description: 'Funding to scale the business after demonstrating a viable business model.',
             color: '#1E90FF',
-            videoId: 'exampleABC',
+            videoId: 'DBhSfROq3wU',
             terms: [
                 {
                     name: 'Anti-Dilution Protection',
@@ -184,7 +185,7 @@ const FinancialLearningPlatform = () => {
             title: 'Series C+',
             description: 'Later-stage funding for companies with proven success, often for expansion or acquisitions.',
             color: '#4682B4',
-            videoId: 'exampleDEF',
+            videoId: 'Th8JoIan4dg',
             terms: [
                 {
                     name: 'Down Round',
@@ -227,7 +228,7 @@ const FinancialLearningPlatform = () => {
             title: 'Exit Options',
             description: 'Ways for founders and investors to realize returns on their investment.',
             color: '#008080',
-            videoId: 'exampleGHI',
+            videoId: 'HZk_JaJQm8Y',
             terms: [
                 {
                     name: 'IPO (Initial Public Offering)',
@@ -278,7 +279,7 @@ const FinancialLearningPlatform = () => {
             title: 'Legal Documents',
             description: 'Essential legal agreements that define relationships between founders, investors, and the company.',
             color: '#800080',
-            videoId: 'exampleJKL',
+            videoId: '_QV1YFdO2ZE',
             terms: [
                 {
                     name: 'Articles of Incorporation',
@@ -292,12 +293,12 @@ const FinancialLearningPlatform = () => {
                         'Bylaws typically cover topics like how board meetings are conducted, voting procedures, and officer responsibilities.',
                 },
                 {
-                    name: 'Stock Purchase Agreement',
+                    name: 'Stock Purchase',
                     description: 'Contract governing the sale of company shares to investors.',
                     examples: 'SPAs outline the number of shares, price per share, representations and warranties, and closing conditions.',
                 },
                 {
-                    name: "Investors' Rights Agreement",
+                    name: "Investors' Rights",
                     description: 'Agreement specifying the rights of investors, including information rights and registration rights.',
                     examples: 'IRAs often include provisions for financial reporting, board observation rights, and inspection rights.',
                 },
@@ -308,7 +309,7 @@ const FinancialLearningPlatform = () => {
                         'If a founder wants to sell their shares, the company or existing investors may have the right to purchase them first.',
                 },
                 {
-                    name: 'Confidentiality Agreement (NDA)',
+                    name: 'Confidentiality (NDA)',
                     description:
                         'Legal contract between parties that outlines confidential information that will be shared but should be restricted from public access.',
                     examples: 'Startups often require NDAs before sharing proprietary information with potential investors or partners.',
@@ -335,10 +336,6 @@ const FinancialLearningPlatform = () => {
             setFilteredTerms([]);
         }
     }, [searchQuery]);
-
-    const handleStageClick = (stage) => {
-        setActiveStage(stage.id === activeStage ? null : stage.id);
-    };
 
     const handleTermClick = (term) => {
         setSelectedTerm(term);
@@ -393,7 +390,7 @@ const FinancialLearningPlatform = () => {
 
     return (
         <div className={`financial-learning-platform ${darkMode ? 'dark-mode' : ''}`}>
-            <header className="platform-header">
+            <div className="platform-header">
                 <h1>Financial Wisdom for Women Founders</h1>
                 <p>Navigate your startup's financial journey from idea to exit</p>
 
@@ -447,7 +444,7 @@ const FinancialLearningPlatform = () => {
                         </div>
                     </div>
                 </div>
-            </header>
+            </div>
 
             {searchQuery && (
                 <div className="search-results">
@@ -458,8 +455,6 @@ const FinancialLearningPlatform = () => {
                                 <div key={index} className="search-term-card" onClick={() => handleTermClick(term)}>
                                     <span className="term-stage-tag">{term.stage}</span>
                                     <h3>{term.name}</h3>
-                                    <p>{term.description}</p>
-                                    <span className="learn-more">Learn more →</span>
                                 </div>
                             ))}
                         </div>
@@ -470,95 +465,80 @@ const FinancialLearningPlatform = () => {
             )}
 
             {!searchQuery && (
-                <div className="journey-navigation">
-                    <ul>
-                        {fundingStages.map((stage) => (
-                            <li key={stage.id}>
-                                <a
-                                    href={`#${stage.id}`}
-                                    className={activeStage === stage.id ? 'active' : ''}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleStageClick(stage);
-                                    }}
-                                    style={{ borderColor: stage.color }}
-                                >
-                                    {stage.title}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {!searchQuery && (
                 <div className="funding-journey" role="main">
                     {fundingStages.map((stage) => (
                         <div
                             id={stage.id}
                             key={stage.id}
-                            className={`funding-stage ${activeStage === stage.id ? 'active' : ''}`}
+                            className="funding-stage"
                             style={{ borderColor: stage.color }}
-                            onClick={() => handleStageClick(stage)}
                             tabIndex="0"
                             role="region"
-                            aria-expanded={activeStage === stage.id}
-                            onKeyPress={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                    handleStageClick(stage);
-                                }
-                            }}
                         >
                             <div className="stage-header" style={{ backgroundColor: stage.color }}>
                                 <h2>{stage.title}</h2>
                             </div>
-                            {activeStage === stage.id && (
-                                <div className="stage-content">
-                                    <p className="stage-description">{stage.description}</p>
-                                    <div className="video-container">
-                                        <iframe
-                                            width="100%"
-                                            height="200"
-                                            src={`https://www.youtube.com/embed/${stage.videoId}`}
-                                            title={`${stage.title} Funding Stage Overview`}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                    <h3>Key Terms to Know</h3>
-                                    <div className="terms-container">
-                                        {stage.terms.map((term) => (
-                                            <div
-                                                key={term.name}
-                                                className="term-card"
-                                                onClick={(e) => {
+                            <div className="stage-content">
+                                <p className="stage-description">{stage.description}</p>
+                                <div className="video-container">
+                                    <iframe
+                                        width="100%"
+                                        height="200"
+                                        src={`https://www.youtube.com/embed/${stage.videoId}`}
+                                        title={`${stage.title} Funding Stage Overview`}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                                <h3>Key Terms to Know</h3>
+                                <div className="terms-container">
+                                    {stage.terms.map((term) => (
+                                        <div
+                                            key={term.name}
+                                            className="term-card"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleTermClick(term);
+                                            }}
+                                            tabIndex="0"
+                                            role="button"
+                                            aria-label={`Learn about ${term.name}`}
+                                            onKeyPress={(e) => {
+                                                if (e.key === 'Enter' || e.key === ' ') {
                                                     e.stopPropagation();
                                                     handleTermClick(term);
-                                                }}
-                                                tabIndex="0"
-                                                role="button"
-                                                aria-label={`Learn about ${term.name}`}
-                                                onKeyPress={(e) => {
-                                                    if (e.key === 'Enter' || e.key === ' ') {
-                                                        e.stopPropagation();
-                                                        handleTermClick(term);
-                                                    }
-                                                }}
-                                            >
-                                                <h4>{term.name}</h4>
-                                                <p className="term-preview">{term.description.substring(0, 60)}...</p>
-                                                <span className="learn-more">Learn more →</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                                                }
+                                            }}
+                                        >
+                                            <h4>{term.name}</h4>
+                                            <p className="term-preview">{term.description.substring(0, 60)}...</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            )}
+                            </div>
                         </div>
                     ))}
                 </div>
             )}
 
+            {searchQuery && (
+                <div className="search-results">
+                    <h2>Search Results for "{searchQuery}"</h2>
+                    {filteredTerms.length > 0 ? (
+                        <div className="search-terms-grid">
+                            {filteredTerms.map((term, index) => (
+                                <div key={index} className="search-term-card" onClick={() => handleTermClick(term)}>
+                                    <span className="term-stage-tag">{term.stage}</span>
+                                    <h3>{term.name}</h3>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-results">No terms found matching your search.</p>
+                    )}
+                </div>
+            )}
             {/* Resources section */}
             <section className="resources-section">
                 <h2>Additional Resources</h2>
@@ -567,25 +547,40 @@ const FinancialLearningPlatform = () => {
                         <div className="resource-icon">📚</div>
                         <h3>Financial Glossary</h3>
                         <p>Complete dictionary of startup funding terms in downloadable PDF format.</p>
-                        <button className="resource-button">Download PDF</button>
+                        <a href="https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_glossary.pdf">
+                            <button className="resource-button">Download PDF</button>
+                        </a>
                     </div>
                     <div className="resource-card">
                         <div className="resource-icon">🎙️</div>
                         <h3>Founder Interviews</h3>
                         <p>Podcast series featuring successful women founders sharing their funding journeys.</p>
-                        <button className="resource-button">Listen Now</button>
+                        <a href="https://youtube.com/playlist?list=PLE0Jo6NF_JYOMvJNqn7jrWEwWn_WjZlKV&si=Vfh2AV9n3B2bsJBq">
+                            <button className="resource-button">Listen Now</button>
+                        </a>
                     </div>
                     <div className="resource-card">
                         <div className="resource-icon">📊</div>
                         <h3>Financial Templates</h3>
                         <p>Customizable financial models and cap table templates for your startup.</p>
-                        <button className="resource-button">Access Templates</button>
+                        <a href="https://www.canva.com/design/DAGiggTZvIY/AkDsMXuHsRi3SNoZzmPJqg/edit">
+                            <button className="resource-button">Access Templates</button>
+                        </a>
                     </div>
                     <div className="resource-card">
                         <div className="resource-icon">👩‍💼</div>
                         <h3>Mentor Network</h3>
                         <p>Connect with experienced founders and investors for personalized advice.</p>
-                        <button className="resource-button">Join Network</button>
+                        <a href="">
+                            <button
+                                className="resource-button"
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                            >
+                                Join Network
+                            </button>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -609,7 +604,10 @@ const FinancialLearningPlatform = () => {
                                 <h4>Related Resources</h4>
                                 <ul className="resource-links">
                                     <li>
-                                        <a href="#" aria-label={`Watch video about ${selectedTerm.name}`}>
+                                        <a
+                                            href="https://www.youtube.com/watch?v=aKq8bkY5eTU"
+                                            aria-label={`Watch video about ${selectedTerm.name}`}
+                                        >
                                             📹 Watch explanation video
                                         </a>
                                     </li>
@@ -645,54 +643,6 @@ const FinancialLearningPlatform = () => {
                     </div>
                 </div>
             )}
-
-            <footer className="platform-footer">
-                <div className="footer-content">
-                    <div className="footer-section">
-                        <h3>Financial Wisdom Platform</h3>
-                        <p>Created for women founders, by women founders.</p>
-                        <p>© 2025 Financial Wisdom Platform</p>
-                    </div>
-                    <div className="footer-section">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li>
-                                <a href="#">About Us</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-                            <li>
-                                <a href="#">Privacy Policy</a>
-                            </li>
-                            <li>
-                                <a href="#">Terms of Service</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="footer-section">
-                        <h3>Connect With Us</h3>
-                        <div className="social-links">
-                            <a href="#" aria-label="LinkedIn">
-                                <span className="social-icon">LinkedIn</span>
-                            </a>
-                            <a href="#" aria-label="Twitter">
-                                <span className="social-icon">Twitter</span>
-                            </a>
-                            <a href="#" aria-label="Instagram">
-                                <span className="social-icon">Instagram</span>
-                            </a>
-                        </div>
-                        <div className="newsletter">
-                            <label htmlFor="email">Subscribe to our newsletter:</label>
-                            <div className="newsletter-input">
-                                <input type="email" id="email" placeholder="Enter your email" aria-label="Email for newsletter" />
-                                <button aria-label="Subscribe">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 };

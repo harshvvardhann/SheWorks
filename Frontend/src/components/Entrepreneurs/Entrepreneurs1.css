@@ -100,7 +100,6 @@
     margin-top: 15px;
     border-radius: 4px;
 }
-/* Base Styles with Pink Theme */
 :root {
     --primary-color: #ff6b98;
     --primary-light: #ffecf2;
@@ -144,14 +143,12 @@
     transform: translateX(-50%);
 }
 
-/* Business List Grid */
 .business-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2.5rem;
 }
 
-/* Business Card Styles */
 .business-card {
     background: var(--white);
     border-radius: 16px;
@@ -244,7 +241,6 @@
     transform: translateY(-2px);
 }
 
-/* Loading and Error States */
 .loading-indicator {
     text-align: center;
     padding: 3rem;
@@ -277,7 +273,6 @@
     border: 1px dashed #ffdeeb;
 }
 
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -473,7 +468,6 @@
     transform: translateY(-2px);
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -494,7 +488,6 @@
     }
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .business-list {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -546,7 +539,6 @@
     }
 }
 
-/* Scrollbar Styling */
 .modal-content::-webkit-scrollbar {
     width: 8px;
 }
