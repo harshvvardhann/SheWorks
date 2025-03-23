@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './InvestorRegistrationForm.css'; // Import the CSS file
 
 const InvestorRegistrationForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -43,13 +45,14 @@ const InvestorRegistrationForm = () => {
             mentorship: false,
             receiveMails: false,
         });
+        navigate('/');
     };
 
     return (
         <div className="form-container">
             <div className="form-box">
                 <h2 className="form-title">Investor Registration</h2>
-                <form1 onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     {['firstName', 'lastName', 'organization'].map((field) => (
                         <div key={field} className="form-group">
                             <label>{field.replace(/([A-Z])/g, ' $1').trim()}:</label>
@@ -93,7 +96,7 @@ const InvestorRegistrationForm = () => {
                     <button type="submit" className="submit-button">
                         Register Now
                     </button>
-                </form1>
+                </form>
             </div>
         </div>
     );
