@@ -92,6 +92,7 @@
 }
 
 .chat-input {
+    color: white;
     flex: 1;
     padding: 12px 15px;
     border: 1px solid #ddd;
