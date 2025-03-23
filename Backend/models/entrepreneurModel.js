@@ -7,7 +7,7 @@ const entrepreneurSchema = new mongoose.Schema({
     },
     middle_name: {
         type: String,
-        required: false, // middle_name can be optional
+        required: false, 
         default: '',
     },
     last_name: {
@@ -25,7 +25,7 @@ const entrepreneurSchema = new mongoose.Schema({
     current_stage: {
         type: String,
         required: true,
-        enum: ['Idea', 'Growth', 'Expansion', 'Mature'], // Example stages
+        enum: ['Idea', 'Growth', 'Expansion', 'Mature'], 
     },
     description: {
         type: String,

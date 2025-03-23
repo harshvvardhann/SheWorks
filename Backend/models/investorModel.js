@@ -24,14 +24,14 @@ const investorSchema = new mongoose.Schema({
     current_stage: {
         type: String,
         required: true,
-        enum: ['Seed', 'Series A', 'Series B'], // Example stages
+        enum: ['Seed', 'Series A', 'Series B'], 
     },
     description: {
         type: String,
         required: true,
     },
     interested_category_startups: {
-        type: [String], // Array of startup categories the investor is interested in
+        type: [String], 
         required: true,
     },
     amount_wanted_to_invest: {

@@ -160,7 +160,7 @@ const SheWorks = () => {
 
     return (
         <div className="mainClass1">
-            {/* Header */}
+            {}
             <header>
                 <div className="container1">
                     <nav className={mobileMenuOpen ? 'mobile-menu-open' : ''}>
@@ -203,7 +203,7 @@ const SheWorks = () => {
                 </div>
             </header>
 
-            {/* Hero Section */}
+            {}
             <section className="hero">
                 <div className="container1">
                     <div className="hero-content">
@@ -220,7 +220,7 @@ const SheWorks = () => {
                 </div>
             </section>
 
-            {/* Programs Section */}
+            {}
             <section className="programs">
                 <div className="container1">
                     <h2 className="section-title">Our Programs</h2>
@@ -246,13 +246,13 @@ const SheWorks = () => {
                 </div>
             </section>
 
-            {/* Success Stories Section */}
+            {}
             <section className="success-stories">
                 <div className="container1">
                     <h2 className="section-title">Success Stories</h2>
                     <div className="story-carousel-container">
                         <div className="story-carousel" ref={carouselRef} style={{ transform: `translateX(${currentPosition}px)` }}>
-                            {/* Double the stories data for continuous scrolling effect */}
+                            {}
                             {[...storiesData].map((story, index) => (
                                 <div className="story-card" key={index}>
                                     <div className="profile-image">
@@ -273,7 +273,7 @@ const SheWorks = () => {
                 </div>
             </section>
 
-            {/* Stats Section */}
+            {}
             <section className="stats">
                 <div className="container-1">
                     <div className="stat-item slide-in-left">
@@ -295,7 +295,7 @@ const SheWorks = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
+            {}
             <section className="cta">
                 <div className="container1">
                     <h2>Ready to Transform Your Career?</h2>
@@ -306,7 +306,7 @@ const SheWorks = () => {
                 </div>
             </section>
 
-            {/* Footer */}
+            {}
             <footer>
                 <div className="container1">
                     <div className="footer-columns">
@@ -374,7 +374,7 @@ const SheWorks = () => {
                 </div>
             </footer>
 
-            {/* Scroll to Top Button */}
+            {}
             <div className={`scroll-top ${scrollToTopVisible ? 'visible' : ''}`} onClick={scrollToTop}>
                 <i className="fas fa-arrow-up"></i>
             </div>

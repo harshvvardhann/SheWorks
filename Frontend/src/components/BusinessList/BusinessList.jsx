@@ -114,7 +114,7 @@ const BusinessCard = ({ business_name, founder_name, business_description, busin
                 </div>
             </div>
 
-            {/* Modal Component */}
+            {}
             <BusinessModal business={businessData} isOpen={showModal} onClose={() => setShowModal(false)} />
         </>
     );

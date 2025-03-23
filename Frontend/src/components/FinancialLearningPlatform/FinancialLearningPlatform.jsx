@@ -539,7 +539,7 @@ const FinancialLearningPlatform = () => {
                     )}
                 </div>
             )}
-            {/* Resources section */}
+            {}
             <section className="resources-section">
                 <h2>Additional Resources</h2>
                 <div className="resources-grid">
@@ -599,7 +599,7 @@ const FinancialLearningPlatform = () => {
                             <h4>Real-World Examples</h4>
                             <p className="term-examples">{selectedTerm.examples}</p>
 
-                            {/* Additional content in modal */}
+                            {}
                             <div className="related-resources">
                                 <h4>Related Resources</h4>
                                 <ul className="resource-links">

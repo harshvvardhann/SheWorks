@@ -24,7 +24,7 @@ const mentorSchema = new mongoose.Schema({
     current_stage: {
         type: String,
         required: true,
-        enum: ['Early Growth', 'Mid Growth', 'Late Growth'], // Example stages
+        enum: ['Early Growth', 'Mid Growth', 'Late Growth'],
     },
     description: {
         type: String,
@@ -35,7 +35,7 @@ const mentorSchema = new mongoose.Schema({
         required: true,
     },
     interested_category_startups: {
-        type: [String], // Array of startup categories
+        type: [String], 
         required: true,
     },
     createdAt: {
